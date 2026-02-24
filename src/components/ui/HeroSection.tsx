@@ -1,13 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import { Wand2, FileText as FileTextIcon, CheckCircle as CheckCircleIcon, Shield, Award as AwardIcon, Star as StarIcon, Sparkles, BookOpen, Users, Volume2, VolumeX } from 'lucide-react';
-
-const heroImages = [
-  { src: "/hero-1.png", alt: "Mahasiswi berhijab sedang belajar" },
-  { src: "/hero-2.png", alt: "Mahasiswa Indonesia di kampus" },
-  { src: "/hero-3.png", alt: "Mahasiswi mengerjakan skripsi" },
-];
+import { useSiteContentStore } from '../../store/siteContentStore';
 
 const HeroSection = () => {
+  const { content } = useSiteContentStore();
+  const heroImages = content.hero.images;
+  const words = content.hero.typingWords;
+
   const [text, setText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [wordIndex, setWordIndex] = useState(0);
@@ -15,8 +14,6 @@ const HeroSection = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-
-  const words = ['Mahasiswa Akhir', 'Pejuang Skripsi', 'Calon Sarjana', 'Siswa Ambis'];
 
   // Typing effect
   useEffect(() => {
