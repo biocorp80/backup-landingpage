@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { supabase } from '../lib/supabaseClient';
 
 interface AdminUser {
     id: string;
@@ -12,55 +12,85 @@ interface AdminUser {
 interface AuthState {
     user: AdminUser | null;
     isLoggedIn: boolean;
+    loading: boolean;
     login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
-    logout: () => void;
+    logout: () => Promise<void>;
     updateProfile: (data: Partial<AdminUser>) => void;
+    initAuth: () => Promise<void>;
 }
 
-// Mock admin credentials — replace with real API call in production
-const MOCK_ADMINS: (AdminUser & { password: string })[] = [
-    {
-        id: 'user-1',
-        name: 'Super Admin',
-        email: 'admin@dosbing.ai',
-        password: 'admin123',
+function mapUser(supaUser: { id: string; email?: string }): AdminUser {
+    const email = supaUser.email ?? '';
+    const name = email.split('@')[0] ?? 'Admin';
+    return {
+        id: supaUser.id,
+        name: name.charAt(0).toUpperCase() + name.slice(1),
+        email,
         role: 'admin',
-        avatar: 'SA',
-    },
-];
+        avatar: name.slice(0, 2).toUpperCase(),
+    };
+}
 
-export const useAuthStore = create<AuthState>()(
-    persist(
-        (set) => ({
-            user: null,
-            isLoggedIn: false,
+export const useAuthStore = create<AuthState>()((set) => ({
+    user: null,
+    isLoggedIn: false,
+    loading: true,
 
-            login: async (email: string, password: string) => {
-                // Simulate API delay
-                await new Promise((res) => setTimeout(res, 800));
+    initAuth: async () => {
+        try {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (session?.user) {
+                set({ user: mapUser(session.user), isLoggedIn: true, loading: false });
+            } else {
+                set({ user: null, isLoggedIn: false, loading: false });
+            }
 
-                const found = MOCK_ADMINS.find(
-                    (a) => a.email === email && a.password === password
-                );
-
-                if (found) {
-                    const { password: _pw, ...userData } = found;
-                    void _pw; // intentionally unused — password not stored in state
-                    set({ user: userData, isLoggedIn: true });
-                    return { success: true };
+            // Listen for auth changes
+            supabase.auth.onAuthStateChange((_event, session) => {
+                if (session?.user) {
+                    set({ user: mapUser(session.user), isLoggedIn: true, loading: false });
+                } else {
+                    set({ user: null, isLoggedIn: false, loading: false });
                 }
-                return { success: false, error: 'Email atau password salah.' };
-            },
-
-            logout: () => set({ user: null, isLoggedIn: false }),
-
-            updateProfile: (data) =>
-                set((state) => ({
-                    user: state.user ? { ...state.user, ...data } : null,
-                })),
-        }),
-        {
-            name: 'dosbing-admin-auth',
+            });
+        } catch {
+            set({ loading: false });
         }
-    )
-);
+    },
+
+    login: async (email: string, password: string) => {
+        try {
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email,
+                password,
+            });
+
+            if (error) {
+                return {
+                    success: false, error: error.message === 'Invalid login credentials'
+                        ? 'Email atau password salah.'
+                        : error.message
+                };
+            }
+
+            if (data.user) {
+                set({ user: mapUser(data.user), isLoggedIn: true });
+                return { success: true };
+            }
+
+            return { success: false, error: 'Login gagal.' };
+        } catch (err) {
+            return { success: false, error: err instanceof Error ? err.message : 'Terjadi kesalahan.' };
+        }
+    },
+
+    logout: async () => {
+        await supabase.auth.signOut();
+        set({ user: null, isLoggedIn: false });
+    },
+
+    updateProfile: (data) =>
+        set((state) => ({
+            user: state.user ? { ...state.user, ...data } : null,
+        })),
+}));

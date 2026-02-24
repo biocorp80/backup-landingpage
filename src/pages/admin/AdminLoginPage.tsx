@@ -51,7 +51,7 @@ const AdminLoginPage = () => {
                                 type="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                placeholder="admin@dosbing.ai"
+                                placeholder="email@example.com"
                                 required
                                 className="w-full px-4 py-3.5 rounded-xl bg-white/10 border border-white/15 text-white placeholder-white/30 focus:outline-none focus:border-teal-400/60 focus:bg-white/15 transition text-sm font-medium"
                             />
@@ -92,12 +92,6 @@ const AdminLoginPage = () => {
                             {loading ? 'Memverifikasi...' : 'Masuk ke Dashboard'}
                         </button>
                     </form>
-
-                    <div className="mt-6 pt-4 border-t border-white/10 text-center">
-                        <p className="text-white/30 text-xs font-medium">
-                            Demo: <span className="text-teal-400">admin@dosbing.ai</span> / <span className="text-teal-400">admin123</span>
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>

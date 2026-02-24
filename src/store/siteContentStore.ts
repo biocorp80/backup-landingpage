@@ -1,14 +1,12 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { supabase } from '../lib/supabaseClient';
 
 export interface SiteContent {
-    // Announcement / Running Text
     announcement: {
         enabled: boolean;
         items: { text: string; emoji: string; color: 'teal' | 'blue' | 'violet' | 'orange' }[];
     };
-
-    // Hero Section
     hero: {
         headline: string;
         subheadline: string;
@@ -17,8 +15,6 @@ export interface SiteContent {
         typingWords: string[];
         images: { src: string; alt: string }[];
     };
-
-    // Header / Navbar
     header: {
         logoText: string;
         logoAccent: string;
@@ -26,18 +22,12 @@ export interface SiteContent {
         ctaText: string;
         ctaLink: string;
     };
-
-    // Features
     features: { title: string; description: string; emoji: string }[];
-
-    // Contact
     contact: {
         whatsappNumber: string;
         email: string;
         address: string;
     };
-
-    // SEO Global
     seo: {
         siteTitle: string;
         siteDescription: string;
@@ -104,19 +94,67 @@ const DEFAULT_CONTENT: SiteContent = {
 
 interface SiteContentStore {
     content: SiteContent;
+    syncing: boolean;
     updateContent: (partial: Partial<SiteContent>) => void;
     resetContent: () => void;
+    loadFromSupabase: () => Promise<void>;
+    saveToSupabase: () => Promise<void>;
 }
 
 export const useSiteContentStore = create<SiteContentStore>()(
     persist(
-        (set) => ({
+        (set, get) => ({
             content: DEFAULT_CONTENT,
-            updateContent: (partial) =>
+            syncing: false,
+
+            updateContent: (partial) => {
                 set((state) => ({
                     content: { ...state.content, ...partial },
-                })),
-            resetContent: () => set({ content: DEFAULT_CONTENT }),
+                }));
+                // Debounced save to Supabase
+                get().saveToSupabase();
+            },
+
+            resetContent: () => {
+                set({ content: DEFAULT_CONTENT });
+                get().saveToSupabase();
+            },
+
+            loadFromSupabase: async () => {
+                try {
+                    const { data, error } = await supabase
+                        .from('site_content')
+                        .select('content')
+                        .eq('id', 'main')
+                        .single();
+
+                    if (!error && data?.content) {
+                        set({ content: { ...DEFAULT_CONTENT, ...(data.content as Partial<SiteContent>) } });
+                    }
+                } catch {
+                    // Fallback to localStorage (handled by persist middleware)
+                }
+            },
+
+            saveToSupabase: async () => {
+                const state = get();
+                if (state.syncing) return;
+                set({ syncing: true });
+
+                try {
+                    await supabase
+                        .from('site_content')
+                        .upsert({
+                            id: 'main',
+                            content: state.content,
+                            updated_at: new Date().toISOString(),
+                        });
+                } catch {
+                    // Silent fail — localStorage cache is the fallback
+                } finally {
+                    set({ syncing: false });
+                }
+            },
         }),
         { name: 'dosbing-site-content' }
     )

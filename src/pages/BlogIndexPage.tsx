@@ -1,8 +1,7 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, X, Rss, ChevronLeft, ChevronRight, ArrowRight, Clock } from 'lucide-react';
-import { blogPosts } from '../data/blog-posts';
-import { categories } from '../data/categories';
+import { Search, X, Rss, ChevronLeft, ChevronRight, ArrowRight, Clock, Loader2 } from 'lucide-react';
+import { useBlogStore } from '../store/blogStore';
 
 const POSTS_PER_PAGE = 6;
 
@@ -15,13 +14,14 @@ const categoryColorMap: Record<string, string> = {
 };
 
 const BlogIndexPage = () => {
+    const { posts: blogPosts, categories, loading } = useBlogStore();
     const [search, setSearch] = useState('');
     const [activeCategory, setActiveCategory] = useState<string | null>(null);
     const [page, setPage] = useState(1);
 
     const publishedPosts = useMemo(
         () => blogPosts.filter((p) => p.status === 'published'),
-        []
+        [blogPosts]
     );
 
     const filtered = useMemo(() => {
@@ -169,7 +169,12 @@ const BlogIndexPage = () => {
                     )}
 
                     {/* Posts Grid */}
-                    {paginated.length === 0 ? (
+                    {loading ? (
+                        <div className="flex flex-col items-center justify-center py-24 gap-4">
+                            <Loader2 size={40} className="text-teal-600 animate-spin" />
+                            <p className="text-slate-500 font-medium">Memuat artikel...</p>
+                        </div>
+                    ) : paginated.length === 0 ? (
                         <div className="text-center py-24">
                             <p className="text-5xl mb-4">📝</p>
                             <p className="text-slate-500 font-medium text-lg mb-2">Tidak ada artikel ditemukan.</p>

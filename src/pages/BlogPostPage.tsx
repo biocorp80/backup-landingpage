@@ -1,8 +1,6 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { Clock, Calendar, ArrowLeft, Wand2, ArrowRight, BookOpen } from 'lucide-react';
-import { blogPosts } from '../data/blog-posts';
-import { categories } from '../data/categories';
-import { tags } from '../data/tags';
+import { Clock, Calendar, ArrowLeft, Wand2, ArrowRight, BookOpen, Loader2 } from 'lucide-react';
+import { useBlogStore } from '../store/blogStore';
 import ShareButtons from '../components/blog/ShareButtons';
 import ArticleCard from '../components/blog/ArticleCard';
 
@@ -16,7 +14,18 @@ const categoryColorMap: Record<string, string> = {
 
 const BlogPostPage = () => {
     const { slug } = useParams<{ slug: string }>();
+    const { posts: blogPosts, categories, tags, loading } = useBlogStore();
+
     const post = blogPosts.find((p) => p.slug === slug && p.status === 'published');
+
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-white flex flex-col items-center justify-center gap-4">
+                <Loader2 size={48} className="text-teal-600 animate-spin" />
+                <p className="text-slate-500 font-bold uppercase tracking-widest text-xs">Memuat Artikel...</p>
+            </div>
+        );
+    }
 
     if (!post) return <Navigate to="/blog" replace />;
 

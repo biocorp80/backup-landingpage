@@ -30,9 +30,9 @@ const MediaManagerPage = () => {
                 continue;
             }
 
-            const maxSize = isAudio ? 8 * 1024 * 1024 : 5 * 1024 * 1024;
+            const maxSize = isAudio ? 15 * 1024 * 1024 : 10 * 1024 * 1024;
             if (file.size > maxSize) {
-                setError(`"${file.name}" — file terlalu besar. Maks ${isAudio ? '8' : '5'}MB.`);
+                setError(`"${file.name}" — file terlalu besar. Maks ${isAudio ? '15' : '10'}MB.`);
                 continue;
             }
 
@@ -68,7 +68,7 @@ const MediaManagerPage = () => {
             setPreviewAudio(null);
         } else {
             if (audioPreviewRef.current) audioPreviewRef.current.pause();
-            audioPreviewRef.current = new Audio(item.dataUrl);
+            audioPreviewRef.current = new Audio(item.url);
             audioPreviewRef.current.volume = 0.5;
             audioPreviewRef.current.play().catch(console.error);
             audioPreviewRef.current.onended = () => setPreviewAudio(null);
@@ -135,7 +135,7 @@ const MediaManagerPage = () => {
                     {uploading ? 'Uploading...' : dragOver ? 'Drop file di sini!' : `Klik atau drag & drop ${tab === 'images' ? 'foto' : 'file musik'}`}
                 </p>
                 <p className="text-xs text-slate-400">
-                    {tab === 'images' ? 'JPG, PNG, WebP, GIF — maks 5MB per file' : 'MP3, WAV, OGG — maks 8MB per file'}
+                    {tab === 'images' ? 'JPG, PNG, WebP, GIF — maks 10MB per file' : 'MP3, WAV, OGG — maks 15MB per file'}
                 </p>
             </div>
 
@@ -152,7 +152,7 @@ const MediaManagerPage = () => {
                         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                             {images.map((img) => (
                                 <div key={img.id} className="group relative bg-white rounded-xl border border-slate-100 overflow-hidden shadow-sm hover:shadow-md transition">
-                                    <img src={img.dataUrl} alt={img.name} className="w-full h-36 object-cover" />
+                                    <img src={img.url} alt={img.name} className="w-full h-36 object-cover" />
 
                                     {/* Overlay */}
                                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition flex items-center justify-center opacity-0 group-hover:opacity-100">
@@ -160,7 +160,7 @@ const MediaManagerPage = () => {
                                             <button
                                                 onClick={(e) => {
                                                     e.stopPropagation();
-                                                    navigator.clipboard.writeText(img.dataUrl).then(() => alert('URL gambar disalin!'));
+                                                    navigator.clipboard.writeText(img.url).then(() => alert('URL gambar disalin!'));
                                                 }}
                                                 className="w-9 h-9 rounded-lg bg-white/90 flex items-center justify-center text-slate-700 hover:bg-white transition"
                                                 title="Copy URL"

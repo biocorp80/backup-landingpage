@@ -277,7 +277,7 @@ const LandingEditorPage = () => {
                                                     const item = await addItem(file);
                                                     if (item) {
                                                         const images = [...content.hero.images];
-                                                        images[i] = { ...images[i], src: item.dataUrl };
+                                                        images[i] = { ...images[i], src: item.url };
                                                         updateContent({ hero: { ...content.hero, images } });
                                                     }
                                                 }}

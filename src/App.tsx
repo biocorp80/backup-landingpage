@@ -22,8 +22,25 @@ import ProfilePage from './pages/admin/ProfilePage';
 import VisitorAnalyticsPage from './pages/admin/VisitorAnalyticsPage';
 import MediaManagerPage from './pages/admin/MediaManagerPage';
 import ProtectedRoute from './components/admin/ProtectedRoute';
+import { useEffect } from 'react';
+import { useAuthStore } from './store/authStore';
+import { useSiteContentStore } from './store/siteContentStore';
+import { useMediaStore } from './store/mediaStore';
+import { useBlogStore } from './store/blogStore';
 
 function App() {
+  const { initAuth } = useAuthStore();
+  const { loadFromSupabase: loadContent } = useSiteContentStore();
+  const { loadFromSupabase: loadMedia } = useMediaStore();
+  const { loadFromSupabase: loadBlog } = useBlogStore();
+
+  useEffect(() => {
+    initAuth();
+    loadContent();
+    loadMedia();
+    loadBlog();
+  }, [initAuth, loadContent, loadMedia, loadBlog]);
+
   return (
     <BrowserRouter>
       <Routes>
