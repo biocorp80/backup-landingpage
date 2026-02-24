@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dosbing.ai - Teman Bimbingan Cerdas, Kapan Saja</title>
+    <!-- Konfigurasi Warna Kustom Tailwind -->
+    <script>
+        window.tailwind = window.tailwind || {};
+        window.tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dosbing: {
+                            blue: '#1A4AB6',
+                            teal: '#1CB8A3',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* Animasi masuk */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        /* Glassmorphism effect untuk tema terang */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 40px -10px rgba(26, 74, 182, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col relative overflow-hidden">
+    
+    <!-- Background Efek Dekoratif (Menggunakan Gradient Dosbing) -->
+    <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-dosbing-blue rounded-full mix-blend-multiply filter blur-[128px] opacity-20 z-0 pointer-events-none"></div>
+    <div class="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-dosbing-teal rounded-full mix-blend-multiply filter blur-[128px] opacity-20 z-0 pointer-events-none"></div>
+
+    <!-- Main Content Container -->
+    <div class="relative z-10 flex-grow flex flex-col px-4 sm:px-6 lg:px-8 w-full max-w-5xl mx-auto">
+        
+        <header class="w-full pt-10 pb-6 flex flex-col items-center sm:items-start">
+            <div class="flex items-center gap-3">
+                <img src="logo.png" alt="Dosbing.ai" class="h-16 sm:h-20 md:h-24 w-auto select-none" />
+            </div>
+            <p class="text-slate-500 font-medium mt-1 text-sm sm:text-base tracking-wide">Teman Bimbingan Cerdas, Kapan Saja.</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow flex flex-col justify-center text-center w-full animate-fade-in pb-10">
+            <span class="inline-block py-1 px-4 rounded-full bg-dosbing-teal/10 border border-dosbing-teal/20 text-sm font-semibold tracking-wide text-dosbing-teal mb-6">
+                🚀 Fase Pengembangan Akhir
+            </span>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
+                Revolusi Bimbingan <br class="hidden sm:block" />
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-dosbing-teal to-dosbing-blue">Akademik Segera Hadir</span>
+            </h1>
+            <p class="mt-4 max-w-2xl text-lg sm:text-xl text-slate-600 mx-auto mb-12 leading-relaxed">
+                Persiapkan diri Anda untuk era baru bimbingan skripsi dan tugas akhir. Dosbing.ai siap mendampingi proses akademikmu menjadi lebih cepat, cerdas, dan terarah.
+            </p>
+
+            <!-- Countdown Timer -->
+            <div class="flex flex-wrap justify-center gap-3 sm:gap-6 mb-12" id="countdown">
+                <!-- Days -->
+                <div class="glass-panel rounded-2xl p-4 sm:p-6 w-20 sm:w-32 flex flex-col items-center justify-center transform transition duration-300 hover:-translate-y-1 hover:border-dosbing-teal/50">
+                    <span id="days" class="text-3xl sm:text-5xl font-extrabold text-dosbing-blue mb-1">00</span>
+                    <span class="text-[10px] sm:text-sm text-slate-500 uppercase font-bold tracking-widest">Hari</span>
+                </div>
+                <!-- Hours -->
+                <div class="glass-panel rounded-2xl p-4 sm:p-6 w-20 sm:w-32 flex flex-col items-center justify-center transform transition duration-300 hover:-translate-y-1 hover:border-dosbing-teal/50">
+                    <span id="hours" class="text-3xl sm:text-5xl font-extrabold text-dosbing-blue mb-1">00</span>
+                    <span class="text-[10px] sm:text-sm text-slate-500 uppercase font-bold tracking-widest">Jam</span>
+                </div>
+                <!-- Minutes -->
+                <div class="glass-panel rounded-2xl p-4 sm:p-6 w-20 sm:w-32 flex flex-col items-center justify-center transform transition duration-300 hover:-translate-y-1 hover:border-dosbing-teal/50">
+                    <span id="minutes" class="text-3xl sm:text-5xl font-extrabold text-dosbing-blue mb-1">00</span>
+                    <span class="text-[10px] sm:text-sm text-slate-500 uppercase font-bold tracking-widest">Menit</span>
+                </div>
+                <!-- Seconds -->
+                <div class="glass-panel rounded-2xl p-4 sm:p-6 w-20 sm:w-32 flex flex-col items-center justify-center transform transition duration-300 hover:-translate-y-1 hover:border-dosbing-teal/50">
+                    <span id="seconds" class="text-3xl sm:text-5xl font-extrabold text-dosbing-blue mb-1">00</span>
+                    <span class="text-[10px] sm:text-sm text-slate-500 uppercase font-bold tracking-widest">Detik</span>
+                </div>
+            </div>
+
+            <!-- Notify Form -->
+            <form id="notify-form" class="max-w-md mx-auto relative flex items-center shadow-2xl shadow-dosbing-blue/10 rounded-full" onsubmit="event.preventDefault(); alert('Terima kasih! Kami akan memberi tahu Anda saat Dosbing.ai rilis.');">
+                <input 
+                    type="email" 
+                    required 
+                    placeholder="Masukkan email kampus / pribadi" 
+                    class="w-full bg-white border border-slate-200 text-slate-800 rounded-full py-4 pl-6 pr-36 focus:outline-none focus:ring-2 focus:ring-dosbing-teal focus:border-transparent placeholder-slate-400 transition-all"
+                >
+                <button 
+                    type="submit" 
+                    class="absolute right-1.5 top-1.5 bottom-1.5 bg-gradient-to-r from-dosbing-teal to-dosbing-blue hover:from-dosbing-blue hover:to-dosbing-teal text-white font-semibold rounded-full px-5 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-dosbing-blue focus:ring-offset-2"
+                >
+                    Kabari Saya
+                </button>
+            </form>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="relative z-10 w-full py-6 mt-auto border-t border-slate-200/60 bg-white/50 backdrop-blur-sm">
+        <div class="flex flex-col items-center justify-center gap-4">
+            <!-- Social Icons -->
+            <div class="flex gap-4">
+                <a href="#" class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-dosbing-blue hover:text-white hover:bg-dosbing-blue transition-all duration-300 shadow-sm">
+                    <i data-lucide="instagram" class="w-5 h-5"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-dosbing-blue hover:text-white hover:bg-dosbing-blue transition-all duration-300 shadow-sm">
+                    <i data-lucide="twitter" class="w-5 h-5"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-dosbing-blue hover:text-white hover:bg-dosbing-blue transition-all duration-300 shadow-sm">
+                    <i data-lucide="linkedin" class="w-5 h-5"></i>
+                </a>
+            </div>
+            <p class="text-slate-500 text-sm font-medium">
+                &copy; <span id="year"></span> Dosbing.ai. Teman Bimbingan Cerdas.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // --- Countdown Timer Logic ---
+        const futureDate = new Date();
+        futureDate.setDate(futureDate.getDate() + 30); // 30 hari dari sekarang
+        const countDownDate = futureDate.getTime();
+
+        const timer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds;
+            
+            if (distance < 0) {
+                clearInterval(timer);
+                document.getElementById("countdown").innerHTML = "<div class='text-3xl sm:text-4xl font-extrabold text-dosbing-teal mb-8'>Dosbing.ai Telah Rilis!</div>";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

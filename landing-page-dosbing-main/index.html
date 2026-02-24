@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dosbing.ai - Asisten Skripsi Premium & Terpercaya Mahasiswa Indonesia</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <meta name="description" content="Platform asisten skripsi nomor #1 di Indonesia dengan teknologi AI terverifikasi.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome & Heroicons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS (Animate On Scroll) CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        window.tailwind = window.tailwind || {};
+        window.tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1A4AB6',   /* Deep Trust Blue */
+                        secondary: '#1CB8A3', /* Academic Teal */
+                        accent: '#F97316',    /* Action Orange */
+                        dark: '#0F172A',
+                        light: '#F8FAFC',     
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'marquee': 'marquee 30s linear infinite',
+                        'glow-pulse': 'glow-pulse 3s infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        },
+                        'glow-pulse': {
+                            '0%, 100%': { boxShadow: '0 0 5px rgba(28, 184, 163, 0.2)' },
+                            '50%': { boxShadow: '0 0 25px rgba(28, 184, 163, 0.5)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Alpine.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        /* === iOS Safari Core Fixes === */
+        html {
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+            overflow-x: hidden;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #1E293B;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, h4, .font-heading { font-family: 'Montserrat', sans-serif; }
+        
+        /* Glassmorphism Navbar — with -webkit- prefix for iOS Safari */
+        .glass-navbar {
+            background: rgba(255, 255, 255, 0.85);
+            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-gradient {
+            background: radial-gradient(circle at top right, #1CB8A3 0%, #1A4AB6 50%, #0F172A 100%);
+        }
+
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #1A4AB6; border-radius: 10px; }
+
+        [x-cloak] { display: none !important; }
+
+        /* === iOS Safari Layout Fixes === */
+        img { max-width: 100%; height: auto; }
+        img[alt*="Dosbing"] { max-width: 120px; object-fit: contain; }
+
+        /* iOS safe area insets for floating buttons */
+        @supports (padding-bottom: env(safe-area-inset-bottom)) {
+            .ios-safe-bottom {
+                bottom: calc(1.5rem + env(safe-area-inset-bottom)) !important;
+            }
+        }
+
+        /* Prevent iOS auto-zoom on inputs */
+        input, select, textarea { font-size: 16px !important; }
+
+        /* iOS backdrop-filter fix for any element using it */
+        .backdrop-blur-sm, .backdrop-blur-md, .backdrop-blur-lg, .backdrop-blur {
+            -webkit-backdrop-filter: blur(4px);
+        }
+
+        /* Fix iOS rubber-band scrolling revealing bg behind body */
+        html { background: #fff; }
+
+        /* Stats responsive border fix: remove divide-x artifact on row wrap */
+        @media (max-width: 1023px) {
+            .stats-grid > div { border-left: none !important; }
+            .stats-grid > div:nth-child(odd) { border-right: 1px solid #f1f5f9; }
+        }
+    </style>
+</head>
+<body class="bg-white antialiased">
+
+    
+
+    <!-- AUDIO PLAYER (FLOATING LEFT) -->
+    <div x-data="{
+        playing: false,
+        audio: null,
+        init() {
+            this.audio = new Audio('theme-song.mp3');
+            this.audio.loop = true;
+            this.audio.volume = 0.5;
+            
+            // Try autoplay on load
+            this.audio.play().then(() => {
+                this.playing = true;
+            }).catch(() => {
+                // Fallback: Play on first interaction
+                document.addEventListener('click', () => {
+                    if (!this.playing) {
+                        this.audio.play().then(() => {
+                            this.playing = true;
+                        }).catch(e => console.log('Audio playback failed:', e));
+                    }
+                }, { once: true });
+            });
+        },
+        toggle() {
+            if (this.playing) {
+                this.audio.pause();
+                this.playing = false;
+            } else {
+                this.audio.play();
+                this.playing = true;
+            }
+        }
+    }" class="fixed bottom-6 left-6 z-50 group ios-safe-bottom">
+        <div class="absolute -inset-1 bg-primary rounded-full blur opacity-40 group-hover:opacity-100 transition duration-1000 group-hover:duration-200" :class="{'animate-pulse': playing}"></div>
+        <button @click="toggle()" class="relative bg-white text-slate-900 w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transform transition group-hover:scale-110 border border-slate-100 overflow-hidden">
+            <div class="absolute inset-0 bg-primary/5" x-show="playing"></div>
+            <i class="fas z-10 text-lg" :class="playing ? 'fa-pause' : 'fa-music'"></i>
+            <!-- Spinning Border when playing -->
+            <div class="absolute inset-0 rounded-full border-2 border-primary/30 border-t-primary animate-spin" x-show="playing" style="animation-duration: 2s;"></div>
+        </button>
+        <!-- Tooltip -->
+        <span class="absolute left-16 top-3 bg-white text-dark text-xs font-bold px-3 py-1.5 rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-gray-100 pointer-events-none">
+            <span x-text="playing ? 'Pause Music' : 'Play Music'"></span>
+        </span>
+    </div>
+
+    <!-- FLOATING CONTACT -->
+    <a href="https://wa.me/6282118709218" target="_blank" class="fixed bottom-6 right-6 z-50 group ios-safe-bottom">
+        <div class="absolute -inset-1 bg-green-400 rounded-full blur opacity-40 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
+        <div class="relative bg-[#25D366] text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center transform transition group-hover:scale-110">
+            <i class="fab fa-whatsapp text-3xl"></i>
+        </div>
+        <span class="absolute right-16 top-2 bg-white text-dark text-xs font-bold px-4 py-2 rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-gray-100">Ada kendala? Hubungi Admin</span>
+    </a>
+
+    <!-- STICKY NAVBAR (Adjusted for Top Bar) -->
+    <nav x-data="{ mobileMenuOpen: false }" class="fixed w-full z-40 glass-navbar py-3 transition-all top-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <!-- Logo Section -->
+            <a href="#" class="flex items-center gap-2 group transition-all">
+                <img src="logo.png" alt="Dosbing.ai Logo" class="h-8 w-auto max-w-[100px] md:h-10 object-contain shrink-0">
+                <span class="font-heading font-black text-2xl md:text-3xl tracking-tight leading-none"><span class="text-primary">Dosbing</span><span class="text-secondary">.ai</span></span>
+            </a>
+            
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="#pricing" class="text-sm font-semibold text-slate-600 hover:text-primary transition-colors">Produk</a>
+                <a href="#how-it-works" class="text-sm font-semibold text-slate-600 hover:text-primary transition-colors">Cara Kerja</a>
+                <a href="#faq" class="text-sm font-semibold text-slate-600 hover:text-primary transition-colors">FAQ</a>
+                <a href="about.html" class="text-sm font-semibold text-slate-600 hover:text-primary transition-colors">Tentang Kami</a>
+                <a href="https://wa.me/6282118709218" target="_blank" class="px-6 py-2.5 rounded-full bg-slate-900 text-white text-sm font-bold hover:bg-primary transition-all shadow-lg hover:shadow-primary/30 transform hover:-translate-y-0.5">
+                    Konsultasi Produk Gratis
+                </a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden text-slate-900 focus:outline-none">
+                <i class="fas fa-bars text-2xl" x-show="!mobileMenuOpen"></i>
+                <i class="fas fa-times text-2xl" x-show="mobileMenuOpen" x-cloak></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div x-show="mobileMenuOpen" 
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 -translate-y-2"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 -translate-y-2"
+             @click.away="mobileMenuOpen = false"
+             class="md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-xl py-4 px-4 flex flex-col gap-4 max-h-[80vh] overflow-y-auto" x-cloak>
+            <a href="#pricing" @click="mobileMenuOpen = false" class="text-sm font-bold text-slate-600 hover:text-primary py-2 border-b border-slate-100">Produk</a>
+            <a href="#how-it-works" @click="mobileMenuOpen = false" class="text-sm font-bold text-slate-600 hover:text-primary py-2 border-b border-slate-100">Cara Kerja</a>
+            <a href="#faq" @click="mobileMenuOpen = false" class="text-sm font-bold text-slate-600 hover:text-primary py-2 border-b border-slate-100">FAQ</a>
+            <a href="about.html" class="text-sm font-bold text-slate-600 hover:text-primary py-2 border-b border-slate-100">Tentang Kami</a>
+            <a href="https://wa.me/6282118709218" target="_blank" class="w-full text-center px-6 py-3 rounded-xl bg-slate-900 text-white text-sm font-bold hover:bg-primary transition-all shadow-lg">
+                Konsultasi Produk Gratis
+            </a>
+        </div>
+    </nav>
+    
+    <!-- ANNOUNCEMENT RUNNING TEXT (PLACED BELOW NAVBAR) -->
+    <div class="w-full bg-dark text-white py-2 overflow-hidden mt-[60px] sm:mt-16 relative z-30">
+        <div class="flex whitespace-nowrap animate-marquee">
+            <div class="flex items-center gap-10 px-10">
+                <p class="text-[11px] md:text-xs font-bold uppercase tracking-widest flex items-center gap-2">
+                    <span class="text-accent">🔥 PROMO TERBATAS:</span> DISKON 60% UNTUK GENERATOR JUDUL HINGGA AKHIR BULAN INI! 🚀
+                </p>
+                <p class="text-[11px] md:text-xs font-bold uppercase tracking-widest flex items-center gap-2">
+                    <span class="text-secondary">💡 TIPS:</span> AJUKAN JUDUL SEKARANG SEBELUM KUOTA BIMBINGAN DOSENMU PENUH! 🎓
+                </p>
+                <p class="text-[11px] md:text-xs font-bold uppercase tracking-widest flex items-center gap-2">
+                    <span class="text-accent">🔥 PROMO TERBATAS:</span> DISKON 60% UNTUK GENERATOR JUDUL HINGGA AKHIR BULAN INI! 🚀
+                </p>
+                <p class="text-[11px] md:text-xs font-bold uppercase tracking-widest flex items-center gap-2">
+                    <span class="text-secondary">💡 TIPS:</span> AJUKAN JUDUL SEKARANG SEBELUM KUOTA BIMBINGAN DOSENMU PENUH! 🎓
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="relative pt-24 pb-12 sm:pt-32 sm:pb-16 md:pt-40 md:pb-24 lg:pt-64 lg:pb-48 hero-gradient overflow-hidden">
+        <div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');"></div>
+        
+        <div class="absolute top-1/4 left-5 w-64 h-64 bg-secondary/20 rounded-full blur-[100px] animate-float"></div>
+        <div class="absolute bottom-1/4 right-5 w-80 h-80 bg-accent/20 rounded-full blur-[120px] animate-float" style="animation-delay: 2s"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <!-- Left Content -->
+                <div class="w-full lg:w-3/5 text-center lg:text-left" data-aos="fade-right">
+                    <div class="inline-flex items-center gap-2 py-2 px-5 rounded-full bg-white/10 border border-white/20 text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-blue-100 mb-8 backdrop-blur-md">
+                        <span class="w-2 h-2 bg-secondary rounded-full animate-ping"></span>
+                        Asisten Skripsi Premium #1 di Indonesia
+                    </div>
+                    <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white leading-[1.1] mb-6 sm:mb-8">
+                        Dosen Pembimbing Virtual 24/7, <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-blue-300">Terstruktur, Etis, Sampai Lulus.</span>
+                    </h1>
+                    <p class="text-base sm:text-lg md:text-xl text-blue-50/80 font-medium mb-8 sm:mb-12 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Dosbing.ai hadir menyelamatkanmu dari <em>writer's block</em>. Dapatkan ide judul yang <span id="typing-text" class="text-white font-bold typing-cursor underline decoration-secondary/50">ACC-able</span> <br class="hidden sm:block">dan susun kerangka Bab 1-5 dalam hitungan menit.
+                    </p>
+                    <div class="flex flex-col md:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="https://lynk.id/dosbing.ai/nvynv9jqqjmj" class="group w-full md:w-auto px-5 sm:px-6 py-3.5 sm:py-4 bg-secondary text-white text-sm sm:text-base font-bold rounded-2xl hover:bg-teal-500 transition-all shadow-[0_15px_30px_rgba(28,184,163,0.3)] transform hover:-translate-y-1 text-center flex items-center justify-center gap-2">
+                            <i class="fas fa-magic group-hover:rotate-12 transition-transform"></i> <span>Generator Judul Sekarang</span>
+                        </a>
+                        <a href="https://lynk.id/dosbing.ai/6v9p194qxev9" target="_blank" class="w-full md:w-auto px-5 sm:px-6 py-3.5 sm:py-4 bg-white/5 border border-white/20 text-white text-sm sm:text-base font-bold rounded-2xl hover:bg-white/10 -webkit-backdrop-filter-blur-sm backdrop-blur-sm transition-all text-center flex items-center justify-center gap-2">
+                            <i class="fas fa-file-word"></i> <span>Template Skripsi Rp 10rb</span>
+                        </a>
+                    </div>
+                    
+                    <div class="mt-12 flex flex-wrap justify-center lg:justify-start gap-8 opacity-60">
+                        <div class="flex items-center gap-2 text-white text-[10px] font-bold tracking-widest uppercase">
+                            <i class="fas fa-check-circle text-secondary"></i> Verifikasi PDDikti
+                        </div>
+                        <div class="flex items-center gap-2 text-white text-[10px] font-bold tracking-widest uppercase">
+                            <i class="fas fa-shield-halved text-secondary"></i> Enkripsi Data Aman
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Content -->
+                <div class="w-full lg:w-2/5 relative" data-aos="fade-left">
+                    <div class="relative max-w-sm mx-auto">
+                        <div class="absolute -inset-4 bg-gradient-to-tr from-secondary to-primary rounded-[3.5rem] blur-2xl opacity-30 animate-pulse"></div>
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop" 
+                             alt="Mahasiswa Indonesia Sukses" 
+                             class="relative rounded-[3rem] shadow-2xl border-4 border-white/20 object-cover h-[350px] sm:h-[450px] lg:h-[500px] w-full transform hover:rotate-1 transition-transform duration-700">
+                        
+                        <div class="absolute -bottom-6 -left-4 sm:-bottom-10 sm:-left-10 bg-white/95 -webkit-backdrop-filter-blur-lg backdrop-blur-lg p-3 sm:p-5 rounded-2xl sm:rounded-3xl shadow-2xl border border-white/50 flex items-center gap-3 sm:gap-4 animate-float z-20">
+                            <div class="w-12 h-12 bg-green-500 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-green-200">
+                                <i class="fas fa-award"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-black text-slate-900 leading-none mb-1">Judul Lolos ACC!</p>
+                                <div class="flex text-[8px] text-yellow-500">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIVERSITY RUNNING TEXT (MARQUEE) -->
+        <div class="mt-16 sm:mt-32 w-full overflow-hidden bg-white/5 backdrop-blur-sm py-6 sm:py-8 border-y border-white/10" style="-webkit-backdrop-filter: blur(4px);">
+            <p class="text-center text-white/40 text-[10px] font-black uppercase tracking-[0.3em] mb-6">Mendukung Format Akademik Kampus Top Indonesia</p>
+            <div class="flex whitespace-nowrap animate-marquee">
+                <div class="flex items-center justify-around gap-20 px-10 grayscale opacity-50 brightness-200">
+                    <span class="text-lg sm:text-2xl font-black text-white uppercase tracking-tighter">Universitas Indonesia</span>
+                    <span class="text-lg sm:text-2xl font-black text-white uppercase tracking-tighter">ITB Bandung</span>
+                    <span class="text-lg sm:text-2xl font-black text-white uppercase tracking-tighter">UGM Yogyakarta</span>
+                    <span class="text-lg sm:text-2xl font-black text-white uppercase tracking-tighter">IPB University</span>
+                    <span class="text-lg sm:text-2xl font-black text-white uppercase tracking-tighter">UNPAD Bandung</span>
+                    <span class="text-lg sm:text-2xl font-black text-white uppercase tracking-tighter">ITS Surabaya</span>
+                    <span class="text-lg sm:text-2xl font-black text-white uppercase tracking-tighter">UNDIP Semarang</span>
+                    <span class="text-lg sm:text-2xl font-black text-white uppercase tracking-tighter">Universitas Indonesia</span>
+                    <span class="text-lg sm:text-2xl font-black text-white uppercase tracking-tighter">ITB Bandung</span>
+                    <span class="text-lg sm:text-2xl font-black text-white uppercase tracking-tighter">UGM Yogyakarta</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRUST STATS SECTION -->
+    <section class="py-12 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-12 text-center stats-grid">
+                <div data-aos="fade-up" data-aos-delay="0">
+                    <div class="text-3xl sm:text-4xl lg:text-5xl font-black text-primary mb-2">12k+</div>
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Dokumen Dihasilkan</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-3xl sm:text-4xl lg:text-5xl font-black text-secondary mb-2">99.2%</div>
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Kepuasan Pengguna</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-3xl sm:text-4xl lg:text-5xl font-black text-primary mb-2">6k+</div>
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Kampus Terdaftar</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-3xl sm:text-4xl lg:text-5xl font-black text-secondary mb-2">24h</div>
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Dukungan Responsif</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE US -->
+    <section class="py-12 md:py-24 bg-light relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-3xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">Standard Kualitas <span class="text-primary">Eksklusif.</span></h2>
+                <p class="text-slate-500 font-medium max-w-2xl mx-auto leading-relaxed text-lg">Kami menjamin setiap output dari Dosbing.ai memenuhi standar penulisan ilmiah tertinggi di Indonesia.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="bg-white p-10 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100 transform transition hover:-translate-y-2" data-aos="fade-up" data-aos-delay="0">
+                    <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-8 text-2xl shadow-inner">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h4 class="text-xl font-black text-slate-900 mb-4">Privasi Terjaga</h4>
+                    <p class="text-slate-500 text-sm leading-relaxed font-medium">Data riset dan identitasmu dijamin 100% aman. Kami menggunakan enkripsi tingkat perbankan untuk melindungi privasimu.</p>
+                </div>
+                <div class="bg-white p-10 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100 transform transition hover:-translate-y-2" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary mb-8 text-2xl shadow-inner">
+                        <i class="fas fa-scroll"></i>
+                    </div>
+                    <h4 class="text-xl font-black text-slate-900 mb-4">Integritas Akademik</h4>
+                    <p class="text-slate-500 text-sm leading-relaxed font-medium">Hasil generator didesain untuk membantu proses berpikir kritis, bukan untuk plagiarisme. Output orisinal dan unik.</p>
+                </div>
+                <div class="bg-white p-10 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100 transform transition hover:-translate-y-2" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center text-accent mb-8 text-2xl shadow-inner">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h4 class="text-xl font-black text-slate-900 mb-4">AI Terverifikasi</h4>
+                    <p class="text-slate-500 text-sm leading-relaxed font-medium">Dilatih khusus dengan ribuan database skripsi Indonesia untuk memastikan relevansi istilah dan metodologi lokal.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BEFORE vs AFTER -->
+    <section id="problem" class="py-12 md:py-24 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div data-aos="fade-right">
+                    <h2 class="text-3xl md:text-5xl font-black text-slate-900 mb-8 tracking-tight leading-tight">Berhenti Menyiksa Diri <br> <span class="text-red-500">Dengan Cara Lama.</span></h2>
+                    <p class="text-slate-500 font-medium mb-10 text-lg">Rata-rata mahasiswa menghabiskan 3-5 minggu hanya untuk mencari judul. Kami memangkasnya menjadi 15 menit saja.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4 p-5 bg-red-50 rounded-2xl border border-red-100 transition hover:bg-red-100">
+                            <i class="fas fa-times-circle text-red-500 text-xl"></i>
+                            <p class="text-sm font-bold text-red-900 italic">"Gak tau mau nulis apa, layar laptop putih terus seharian..."</p>
+                        </div>
+                        <div class="flex items-center gap-4 p-5 bg-red-50 rounded-2xl border border-red-100 transition hover:bg-red-100">
+                            <i class="fas fa-times-circle text-red-500 text-xl"></i>
+                            <p class="text-sm font-bold text-red-900 italic">"Udah ngajuin 3 judul ditolak semua, dibilang gak relevan..."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 rounded-[3rem] p-10 md:p-14 shadow-2xl relative border-t-8 border-secondary" data-aos="fade-left">
+                    <div class="absolute -top-6 left-10 bg-secondary text-white font-black px-8 py-2 rounded-full text-xs shadow-xl tracking-widest uppercase">Evolusi Skripsi</div>
+                    <h3 class="text-2xl font-black text-white mb-10">Bersama Dosbing.ai:</h3>
+                    
+                    <ul class="space-y-8">
+                        <li class="flex gap-5">
+                            <div class="flex-shrink-0 w-8 h-8 bg-secondary/20 rounded-lg flex items-center justify-center text-secondary"><i class="fas fa-check"></i></div>
+                            <div>
+                                <p class="text-white font-bold mb-1">Judul yang Tajam & Terarah</p>
+                                <p class="text-slate-400 text-sm">Output AI kami menyertakan novelty (kebaruan) yang disukai dosen penguji.</p>
+                            </div>
+                        </li>
+                        <li class="flex gap-5">
+                            <div class="flex-shrink-0 w-8 h-8 bg-secondary/20 rounded-lg flex items-center justify-center text-secondary"><i class="fas fa-check"></i></div>
+                            <div>
+                                <p class="text-white font-bold mb-1">Format Word 100% Sempurna</p>
+                                <p class="text-slate-400 text-sm">Tidak perlu pusing margin, spasi, atau daftar isi manual lagi.</p>
+                            </div>
+                        </li>
+                        <li class="flex gap-5">
+                            <div class="flex-shrink-0 w-8 h-8 bg-secondary/20 rounded-lg flex items-center justify-center text-secondary"><i class="fas fa-check"></i></div>
+                            <div>
+                                <p class="text-white font-bold mb-1">Persiapan Mental Bimbingan</p>
+                                <p class="text-slate-400 text-sm">Dapatkan draf pertanyaan yang mungkin ditanyakan dosen saat presentasi judul.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TELAAH AKADEMIK 4 PILAR -->
+    <section class="py-16 md:py-24 bg-slate-50 relative overflow-hidden border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-secondary font-black tracking-widest uppercase text-xs mb-2 block">STANDAR KUALITAS</span>
+                <h2 class="text-3xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">Telaah Akademik <span class="text-primary">4 Pilar.</span></h2>
+                <p class="text-slate-500 font-medium max-w-2xl mx-auto text-lg">Sistem AI akan memberikan skor dan analisis mendalam pada empat aspek krusial.</p>
+            </div>
+
+            <!-- 4 Pillars Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                <!-- Pillar 1: Necessity -->
+                <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 hover:-translate-y-1 transition-transform duration-300 h-full" data-aos="fade-up" data-aos-delay="0">
+                    <div class="w-14 h-14 bg-red-100 text-red-500 rounded-2xl flex items-center justify-center text-2xl mb-6 font-black shadow-sm">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3 class="font-bold text-xl text-slate-900 mb-3">Necessity (Urgensi)</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">Menilai seberapa penting masalah tersebut untuk diteliti saat ini.</p>
+                </div>
+
+                <!-- Pillar 2: Novelty -->
+                <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 hover:-translate-y-1 transition-transform duration-300 h-full" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 bg-blue-100 text-primary rounded-2xl flex items-center justify-center text-2xl mb-6 font-black shadow-sm">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="font-bold text-xl text-slate-900 mb-3">Novelty (Kebaruan)</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">Memastikan adanya celah penelitian (research gap) atau sisi unik yang membedakan penelitian Anda dengan penelitian terdahulu.</p>
+                </div>
+
+                <!-- Pillar 3: Relevance -->
+                <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 hover:-translate-y-1 transition-transform duration-300 h-full" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center text-2xl mb-6 font-black shadow-sm">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3 class="font-bold text-xl text-slate-900 mb-3">Relevance (Kesesuaian)</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">Menilai apakah judul sesuai dengan bidang keilmuan atau program studi Anda.</p>
+                </div>
+
+                <!-- Pillar 4: Feasibility -->
+                <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 hover:-translate-y-1 transition-transform duration-300 h-full" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-14 h-14 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center text-2xl mb-6 font-black shadow-sm">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3 class="font-bold text-xl text-slate-900 mb-3">Feasibility (Kelayakan)</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">Meninjau apakah penelitian tersebut mungkin dilakukan dalam hal waktu, biaya, dan ketersediaan data.</p>
+                </div>
+            </div>
+
+            <!-- Validation Result Section -->
+            <div class="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-xl border border-slate-100 relative overflow-hidden" data-aos="fade-up">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-slate-50 rounded-full -mr-32 -mt-32 opacity-50"></div>
+                <div class="absolute bottom-0 left-0 w-64 h-64 bg-blue-50 rounded-full -ml-32 -mb-32 opacity-50"></div>
+                
+                <div class="relative z-10">
+                    <div class="text-center mb-10">
+                        <h3 class="text-2xl md:text-3xl font-black text-slate-900 mb-4">Hasil Akhir Validasi</h3>
+                        <p class="text-slate-500 font-medium max-w-2xl mx-auto">Setelah melalui tahap validasi ini, Anda akan mendapatkan output berupa dokumen PDF yang berisi:</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-10">
+                        <!-- Result 1 -->
+                        <div class="flex flex-col items-center text-center group hover:-translate-y-1 transition-transform">
+                            <div class="w-16 h-16 bg-slate-100 text-slate-700 group-hover:bg-primary/10 group-hover:text-primary rounded-full flex items-center justify-center text-2xl mb-4 transition-colors">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h4 class="font-bold text-lg text-slate-900 mb-2">Skor Validasi</h4>
+                            <p class="text-sm text-slate-500">Indikator numerik kelayakan judul.</p>
+                        </div>
+                        <!-- Result 2 -->
+                        <div class="flex flex-col items-center text-center group hover:-translate-y-1 transition-transform">
+                            <div class="w-16 h-16 bg-slate-100 text-slate-700 group-hover:bg-primary/10 group-hover:text-primary rounded-full flex items-center justify-center text-2xl mb-4 transition-colors">
+                                <i class="fas fa-book-open"></i>
+                            </div>
+                            <h4 class="font-bold text-lg text-slate-900 mb-2">Justifikasi Ilmiah</h4>
+                            <p class="text-sm text-slate-500">Alasan mengapa judul layak diteliti.</p>
+                        </div>
+                        <!-- Result 3 -->
+                        <div class="flex flex-col items-center text-center group hover:-translate-y-1 transition-transform">
+                            <div class="w-16 h-16 bg-slate-100 text-slate-700 group-hover:bg-primary/10 group-hover:text-primary rounded-full flex items-center justify-center text-2xl mb-4 transition-colors">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h4 class="font-bold text-lg text-slate-900 mb-2">Bahan Argumentasi</h4>
+                            <p class="text-sm text-slate-500">Senjata untuk diskusi dengan dosen.</p>
+                        </div>
+                        <!-- Result 4 -->
+                        <div class="flex flex-col items-center text-center group hover:-translate-y-1 transition-transform">
+                            <div class="w-16 h-16 bg-slate-100 text-slate-700 group-hover:bg-primary/10 group-hover:text-primary rounded-full flex items-center justify-center text-2xl mb-4 transition-colors">
+                                <i class="fas fa-sitemap"></i>
+                            </div>
+                            <h4 class="font-bold text-lg text-slate-900 mb-2">Kerangka & Plan</h4>
+                            <p class="text-sm text-slate-500">Desain variabel hingga analisis data.</p>
+                        </div>
+                        <!-- Result 5 -->
+                        <div class="flex flex-col items-center text-center group hover:-translate-y-1 transition-transform">
+                            <div class="w-16 h-16 bg-slate-100 text-slate-700 group-hover:bg-primary/10 group-hover:text-primary rounded-full flex items-center justify-center text-2xl mb-4 transition-colors">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <h4 class="font-bold text-lg text-slate-900 mb-2">Draf Kuesioner</h4>
+                            <p class="text-sm text-slate-500">10 butir pernyataan siap pakai.</p>
+                        </div>
+                    </div>
+
+                    <!-- Important Note -->
+                    <div class="bg-amber-50 border-l-4 border-amber-400 p-6 rounded-r-xl">
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-info-circle text-amber-500 text-xl"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-slate-900 mb-1">Catatan Penting</h5>
+                                <p class="text-sm text-slate-600 leading-relaxed">Meskipun sistem memberikan validasi akademik yang tinggi, keputusan akhir tetap berada di tangan dosen pembimbing masing-masing. Dokumen PDF hasil validasi ini dirancang untuk menjadi "senjata" Anda dalam berdiskusi dan mempertahankan argumen saat bimbingan.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCT SHOWCASE (GENERATOR JUDUL) -->
+    <section class="py-16 md:py-24 bg-slate-50 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-primary font-black tracking-widest uppercase text-xs mb-2 block">CONTOH HASIL NYATA</span>
+                <h2 class="text-3xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">Intip Daleman <span class="text-secondary">Generator Judul.</span></h2>
+                <p class="text-slate-500 font-medium max-w-2xl mx-auto text-lg">Lihat langsung bagaimana sistem kami bekerja menghasilkan judul dan dokumen berkualitas untukmu.</p>
+            </div>
+
+            <!-- Carousel -->
+            <!-- Video & PDF Preview Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+                
+                <!-- Video Column -->
+                <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100 flex flex-col" data-aos="fade-right">
+                    <div class="relative pb-[56.25%] h-0 bg-black">
+                        <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/lfNxUzMbk9c?rel=0" title="Tutorial Dosbing.ai" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div class="p-8 flex-grow">
+                        <div class="w-12 h-12 bg-red-100 text-red-600 rounded-xl flex items-center justify-center text-xl mb-4">
+                            <i class="fab fa-youtube"></i>
+                        </div>
+                        <h3 class="font-bold text-2xl text-slate-900 mb-3">Tutorial Penggunaan</h3>
+                        <p class="text-slate-500 leading-relaxed">Saksikan bagaimana mudahnya menggunakan Generator Judul Dosbing.ai untuk menemukan topik penelitian yang tepat dan valid secara akademik dalam hitungan menit.</p>
+                    </div>
+                </div>
+
+                <!-- PDF Preview Column -->
+                <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100 flex flex-col" data-aos="fade-left">
+                    <div class="relative h-[400px] bg-slate-100 border-b border-slate-200">
+                        <!-- Desktop PDF Embed (Hidden on Mobile) -->
+                        <div class="hidden lg:block w-full h-full relative">
+                            <iframe src="template-preview.pdf#toolbar=0&navpanes=0&scrollbar=0" class="w-full h-full" style="border: none;"></iframe>
+                            <!-- Overlay -->
+                            <a href="template-preview.pdf" target="_blank" class="absolute inset-0 bg-black/0 hover:bg-black/5 transition-colors group flex items-center justify-center">
+                                <div class="bg-white/90 backdrop-blur px-6 py-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all transform translate-y-4 group-hover:translate-y-0 text-slate-900 font-bold text-sm">
+                                    <i class="fas fa-external-link-alt mr-2"></i> Buka Full Screen
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Mobile Fallback (Visible on Mobile) -->
+                        <div class="lg:hidden w-full h-full flex flex-col items-center justify-center bg-slate-50 p-6 text-center">
+                            <div class="w-20 h-20 bg-white rounded-2xl shadow-sm border border-slate-200 flex items-center justify-center mb-4 text-red-500">
+                                <i class="fas fa-file-pdf text-4xl"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-900 mb-2">Preview Template PDF</h4>
+                            <p class="text-slate-500 text-sm mb-6 max-w-xs mx-auto">Tampilan preview tidak tersedia di mobile. Silakan unduh atau buka file untuk melihat.</p>
+                            <a href="template-preview.pdf" target="_blank" class="bg-primary text-white px-6 py-3 rounded-xl font-bold text-sm shadow-lg hover:bg-blue-700 transition flex items-center gap-2">
+                                <i class="fas fa-download"></i> Buka / Download PDF
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-8 flex-grow">
+                        <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center text-xl mb-4">
+                            <i class="fas fa-file-word"></i>
+                        </div>
+                        <h3 class="font-bold text-2xl text-slate-900 mb-3">Preview Template Skripsi</h3>
+                        <p class="text-slate-500 leading-relaxed">Contoh nyata template kerangka skripsi yang akan Anda dapatkan. Format rapi, sesuai pedoman akademik, dan siap pakai.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING SECTION -->
+    <section id="pricing" class="py-16 md:py-32 bg-slate-900 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none" style="background-image: url('https://www.transparenttextures.com/patterns/dark-matter.png');"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <h2 class="text-3xl md:text-5xl font-black text-white mb-6 tracking-tight" data-aos="fade-up">Investasi Untuk <span class="text-secondary">Masa Depanmu.</span></h2>
+            <p class="text-slate-400 font-medium max-w-2xl mx-auto mb-20 text-lg" data-aos="fade-up" data-aos-delay="100">Pilih paket bantuan yang paling sesuai dengan kebutuhan bimbinganmu saat ini.</p>
+
+            <div class="flex flex-wrap justify-center items-stretch gap-8 max-w-7xl mx-auto">
+                <!-- Plan 1 -->
+                <div class="relative w-full md:w-[45%] lg:w-[30%] group flex" data-aos="fade-up" data-aos-delay="0">
+                    <div class="absolute -top-4 left-6 bg-accent text-white text-[10px] font-black uppercase tracking-[0.2em] px-3 py-1.5 rounded-full shadow-lg z-20">Hemat 70%</div>
+                    <div class="bg-white rounded-[2.5rem] p-6 sm:p-8 flex flex-col border border-slate-100 shadow-xl transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-2xl w-full h-full">
+                        <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-file-word text-2xl"></i>
+                        </div>
+                        <h4 class="font-heading text-xl font-black text-slate-900 mb-2">Kerangka Skripsi</h4>
+                        <p class="text-slate-500 text-sm mb-8 font-medium italic">Template Word (.docx) Profesional</p>
+                        <ul class="space-y-4 mb-10 flex-grow text-sm font-bold text-slate-700 text-left">
+                            <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-lg bg-secondary/10 text-secondary flex items-center justify-center flex-shrink-0 mt-0.5"><i class="fas fa-check text-[10px]"></i></span> <span class="leading-tight">Sesuai Pedoman Kampus (Database PDDikti)</span></li>
+                            <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-lg bg-secondary/10 text-secondary flex items-center justify-center flex-shrink-0 mt-0.5"><i class="fas fa-check text-[10px]"></i></span> <span class="leading-tight">Format Rapi (Margin, Font, Spasi)</span></li>
+                            <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-lg bg-secondary/10 text-secondary flex items-center justify-center flex-shrink-0 mt-0.5"><i class="fas fa-check text-[10px]"></i></span> <span class="leading-tight">Daftar Isi & Tabel Otomatis</span></li>
+                            <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-lg bg-secondary/10 text-secondary flex items-center justify-center flex-shrink-0 mt-0.5"><i class="fas fa-check text-[10px]"></i></span> <span class="leading-tight">Lengkap dengan Logo Kampus</span></li>
+                            <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-lg bg-secondary/10 text-secondary flex items-center justify-center flex-shrink-0 mt-0.5"><i class="fas fa-check text-[10px]"></i></span> <span class="leading-tight">Praktis, Tinggal Isi Konten</span></li>
+                        </ul>
+                        <div class="mb-8 text-left mt-auto">
+                            <span class="text-slate-300 line-through text-xs font-black">Rp 35.000</span>
+                            <p class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mt-1">Rp 10.000</p>
+                        </div>
+                        <a href="https://lynk.id/dosbing.ai/6v9p194qxev9" target="_blank" class="w-full bg-slate-900 text-white py-4 rounded-2xl font-black text-center shadow-[0_10px_20px_rgba(2,6,23,0.35)] hover:bg-slate-800 transition">
+                            Ambil Template
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Plan 2 (Featured) -->
+                <div class="relative w-full md:w-[45%] lg:w-[30%] group z-10 flex order-first lg:order-none" data-aos="fade-up" data-aos-delay="100">
+                    <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-secondary text-white font-black text-[10px] uppercase tracking-[0.2em] px-6 sm:px-8 py-2.5 rounded-full shadow-2xl z-30 whitespace-nowrap">Best Seller</div>
+                    <div class="rounded-[2.7rem] p-[2px] bg-gradient-to-br from-secondary via-primary to-accent shadow-2xl w-full flex flex-col">
+                        <div class="bg-white rounded-[2.6rem] p-5 sm:p-8 flex flex-col border border-slate-100 transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-[0_25px_50px_rgba(26,74,182,0.25)] w-full h-full">
+                            <div class="w-16 h-16 bg-gradient-to-br from-primary to-blue-500 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200 mb-6 group-hover:rotate-12 transition-transform duration-300">
+                                <i class="fas fa-wand-magic-sparkles text-3xl"></i>
+                            </div>
+                            <h4 class="font-heading text-xl font-black text-primary mb-2">Generator Judul</h4>
+                            <p class="text-slate-500 text-sm mb-8 font-medium italic">Solusi Buntu Ide (15 Menit Jadi)</p>
+                            <ul class="space-y-5 mb-10 flex-grow text-sm font-bold text-slate-800 text-left">
+                                <li class="flex items-start gap-4 bg-slate-50 p-3 rounded-xl border border-slate-100"><i class="fas fa-star text-yellow-500 flex-shrink-0 mt-0.5"></i> <span class="leading-tight">3 Opsi Judul Unik & Masuk Akal</span></li>
+                                <li class="flex items-start gap-4 bg-slate-50 p-3 rounded-xl border border-slate-100"><i class="fas fa-magnifying-glass-chart text-primary flex-shrink-0 mt-0.5"></i> <span class="leading-tight">Analisis 4 Pilar (Urgency, Novelty, dll)</span></li>
+                                <li class="flex items-start gap-4 bg-slate-50 p-3 rounded-xl border border-slate-100"><i class="fas fa-sitemap text-primary flex-shrink-0 mt-0.5"></i> <span class="leading-tight">Matriks Penelitian (Var, Hipotesis)</span></li>
+                                <li class="flex items-start gap-4 bg-slate-50 p-3 rounded-xl border border-slate-100"><i class="fas fa-comments text-primary flex-shrink-0 mt-0.5"></i> <span class="leading-tight">Draft Kuesioner & Pertanyaan Dosen</span></li>
+                                <li class="flex items-start gap-4 bg-slate-50 p-3 rounded-xl border border-slate-100"><i class="fas fa-file-pdf text-red-500 flex-shrink-0 mt-0.5"></i> <span class="leading-tight">Output PDF Lengkap & Rapi</span></li>
+                            </ul>
+                            <div class="mb-8 text-left mt-auto">
+                                <span class="text-slate-300 line-through text-xs font-black">Rp 50.000</span>
+                                <p class="text-4xl sm:text-5xl lg:text-6xl font-black text-primary mt-1">Rp 20.000</p>
+                            </div>
+                            <a href="https://lynk.id/dosbing.ai/nvynv9jqqjmj" target="_blank" class="w-full bg-primary text-white py-5 rounded-2xl font-black text-center shadow-2xl hover:bg-blue-800 transition transform hover:-translate-y-1">
+                                Beli Kode Akses
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Plan 3 (Outline - Coming Soon) -->
+                <div class="relative w-full md:w-[45%] lg:w-[30%] group flex" data-aos="fade-up" data-aos-delay="200">
+                    <div class="bg-slate-800 rounded-[2.5rem] p-6 sm:p-8 flex flex-col relative overflow-hidden border border-slate-700/60 shadow-inner w-full h-full">
+                        <div class="absolute inset-0 pointer-events-none bg-gradient-to-b from-white/5 via-transparent to-white/0"></div>
+                        <div class="absolute inset-0 flex items-center justify-center z-20">
+                            <div class="bg-white text-slate-900 font-black px-6 py-2 rounded-xl text-xs uppercase tracking-widest -rotate-12 border-2 border-primary shadow-2xl animate-pulse">Coming Soon</div>
+                        </div>
+                        <div class="w-14 h-14 bg-slate-700/50 rounded-2xl flex items-center justify-center text-slate-500 mb-6 border border-slate-600">
+                            <i class="fas fa-list-check text-2xl"></i>
+                        </div>
+                        <h4 class="font-heading text-xl font-black text-slate-300 mb-2">Outline Skripsi</h4>
+                        <p class="text-slate-400 text-sm mb-6">Breakdown Bab 1-3 Otomatis</p>
+                        <p class="text-slate-500 text-xs leading-relaxed mb-8">Buat struktur skripsi dari Latar Belakang hingga Metodologi hanya dengan input judul.</p>
+                        <div class="flex-grow"></div>
+                        <button disabled class="w-full bg-slate-700 text-slate-500 py-5 rounded-2xl font-black cursor-not-allowed mt-auto opacity-50">Nantikan Segera</button>
+                    </div>
+                </div>
+
+                <!-- Plan 4 (PPTX - Coming Soon) -->
+                <div class="relative w-full md:w-[45%] lg:w-[30%] group flex" data-aos="fade-up" data-aos-delay="300">
+                    <div class="bg-slate-800 rounded-[2.5rem] p-6 sm:p-8 flex flex-col relative overflow-hidden border border-slate-700/60 shadow-inner w-full h-full">
+                        <div class="absolute inset-0 pointer-events-none bg-gradient-to-b from-white/5 via-transparent to-white/0"></div>
+                        <div class="absolute inset-0 flex items-center justify-center z-20">
+                            <div class="bg-white text-slate-900 font-black px-6 py-2 rounded-xl text-xs uppercase tracking-widest -rotate-12 border-2 border-primary shadow-2xl animate-pulse">Coming Soon</div>
+                        </div>
+                        <div class="w-14 h-14 bg-slate-700/50 rounded-2xl flex items-center justify-center text-slate-500 mb-6 border border-slate-600">
+                            <i class="fas fa-file-powerpoint text-2xl"></i>
+                        </div>
+                        <h4 class="font-heading text-xl font-black text-slate-300 mb-2">Generator PPTX</h4>
+                        <p class="text-slate-400 text-sm mb-6">Persiapan Sempro & Sidang</p>
+                        <p class="text-slate-500 text-xs leading-relaxed mb-8">Ubah naskah skripsi jadi slide presentasi estetik dengan poin-poin kunci otomatis.</p>
+                        <div class="flex-grow"></div>
+                        <button disabled class="w-full bg-slate-700 text-slate-500 py-5 rounded-2xl font-black cursor-not-allowed mt-auto opacity-50">Nantikan Segera</button>
+                    </div>
+                </div>
+
+                <!-- Plan 5 (App - Coming Soon) -->
+                <div class="relative w-full md:w-[45%] lg:w-[30%] group flex" data-aos="fade-up" data-aos-delay="400">
+                    <div class="bg-slate-800 rounded-[2.5rem] p-6 sm:p-8 flex flex-col relative overflow-hidden border border-slate-700/60 shadow-inner w-full h-full">
+                        <div class="absolute inset-0 pointer-events-none bg-gradient-to-b from-white/5 via-transparent to-white/0"></div>
+                        <div class="absolute inset-0 flex items-center justify-center z-20">
+                            <div class="bg-white text-slate-900 font-black px-6 py-2 rounded-xl text-xs uppercase tracking-widest -rotate-12 border-2 border-primary shadow-2xl animate-pulse">Coming Soon</div>
+                        </div>
+                        <div class="w-14 h-14 bg-slate-700/50 rounded-2xl flex items-center justify-center text-slate-500 mb-6 border border-slate-600">
+                            <i class="fas fa-mobile-screen-button text-2xl"></i>
+                        </div>
+                        <h4 class="font-heading text-xl font-black text-slate-300 mb-2">Aplikasi Dosbing.ai</h4>
+                        <p class="text-slate-400 text-sm mb-6">Asisten Riset Saku</p>
+                        <p class="text-slate-500 text-xs leading-relaxed mb-8">Konsultasi 24/7, manajemen referensi, dan tracking progress skripsi dalam satu aplikasi.</p>
+                        <div class="flex-grow"></div>
+                        <button disabled class="w-full bg-slate-700 text-slate-500 py-5 rounded-2xl font-black cursor-not-allowed mt-auto opacity-50">Nantikan Segera</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS SECTION -->
+    <section id="how-it-works" class="py-12 md:py-24 bg-slate-5 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-blue-50/50 to-transparent pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-1/3 h-full bg-gradient-to-r from-teal-50/50 to-transparent pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">Cara Kerja <span class="text-primary">Dosbing.ai</span></h2>
+                <p class="text-slate-500 font-medium max-w-2xl mx-auto text-lg">Pilih produk yang kamu butuhkan dan ikuti langkah mudah berikut.</p>
+            </div>
+
+            <div x-data="{ tab: 'kerangka' }" class="max-w-6xl mx-auto">
+                <!-- Tabs -->
+                <div class="flex justify-center mb-16" data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-white p-1.5 rounded-full shadow-xl border border-slate-100 inline-flex relative z-10 flex-wrap justify-center max-w-full">
+                        <button @click="tab = 'kerangka'" :class="{ 'bg-secondary text-white shadow-lg': tab === 'kerangka', 'text-slate-500 hover:text-slate-700': tab !== 'kerangka' }" class="px-4 sm:px-6 md:px-10 py-3 md:py-4 rounded-full font-black transition-all duration-300 text-xs sm:text-sm md:text-lg flex items-center gap-2 sm:gap-3 min-h-[44px]">
+                            <i class="fas fa-file-word"></i> <span>Kerangka Skripsi</span>
+                        </button>
+                        <button @click="tab = 'generator'" :class="{ 'bg-primary text-white shadow-lg': tab === 'generator', 'text-slate-500 hover:text-slate-700': tab !== 'generator' }" class="px-4 sm:px-6 md:px-10 py-3 md:py-4 rounded-full font-black transition-all duration-300 text-xs sm:text-sm md:text-lg flex items-center gap-2 sm:gap-3 min-h-[44px]">
+                            <i class="fas fa-wand-magic-sparkles"></i> <span>Generator Judul</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Content: Kerangka Skripsi -->
+                <div x-show="tab === 'kerangka'" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Step 1 -->
+                    <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-lg hover:shadow-xl transition-all duration-300 group relative overflow-hidden h-full">
+                        <div class="absolute -right-4 -top-4 w-20 h-20 bg-slate-100 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+                        <div class="w-12 h-12 bg-secondary text-white rounded-2xl flex items-center justify-center font-black text-xl mb-6 relative z-10 shadow-lg shadow-teal-200">1</div>
+                        <h4 class="font-heading font-black text-lg text-slate-900 mb-3 relative z-10">Kunjungi Link Pembelian</h4>
+                        <p class="text-slate-500 text-sm font-medium relative z-10 leading-relaxed">Buka browser dan kunjungi <span class="text-secondary font-bold">lynk.id/dosbing.ai</span>. Pilih paket yang sesuai dengan kebutuhan kampus dan prodi kamu, lalu selesaikan pembayaran.</p>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-lg hover:shadow-xl transition-all duration-300 group relative overflow-hidden h-full">
+                        <div class="absolute -right-4 -top-4 w-20 h-20 bg-slate-100 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+                        <div class="w-12 h-12 bg-secondary text-white rounded-2xl flex items-center justify-center font-black text-xl mb-6 relative z-10 shadow-lg shadow-teal-200">2</div>
+                        <h4 class="font-heading font-black text-lg text-slate-900 mb-3 relative z-10">Konfirmasi ke Admin</h4>
+                        <p class="text-slate-500 text-sm font-medium relative z-10 leading-relaxed">Kirim screenshot bukti bayar ke WhatsApp Admin di nomor <span class="text-secondary font-bold">0821-1187-09218</span>.</p>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-lg hover:shadow-xl transition-all duration-300 group relative overflow-hidden h-full">
+                        <div class="absolute -right-4 -top-4 w-20 h-20 bg-slate-100 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+                        <div class="w-12 h-12 bg-secondary text-white rounded-2xl flex items-center justify-center font-black text-xl mb-6 relative z-10 shadow-lg shadow-teal-200">3</div>
+                        <h4 class="font-heading font-black text-lg text-slate-900 mb-3 relative z-10">Terima Dokumen</h4>
+                        <p class="text-slate-500 text-sm font-medium relative z-10 leading-relaxed">Kamu akan mendapatkan dokumen Kerangka Skripsi (.docx) yang dikirimkan oleh Admin langsung ke WhatsApp kamu.</p>
+                    </div>
+                    <!-- Step 4 -->
+                    <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-lg hover:shadow-xl transition-all duration-300 group relative overflow-hidden h-full">
+                        <div class="absolute -right-4 -top-4 w-20 h-20 bg-slate-100 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+                        <div class="w-12 h-12 bg-secondary text-white rounded-2xl flex items-center justify-center font-black text-xl mb-6 relative z-10 shadow-lg shadow-teal-200">4</div>
+                        <h4 class="font-heading font-black text-lg text-slate-900 mb-3 relative z-10">Mulai Mengerjakan</h4>
+                        <p class="text-slate-500 text-sm font-medium relative z-10 leading-relaxed">Selamat mengerjakan skripsi! Kamu tinggal mengisi konten penelitian pada template yang sudah rapi.</p>
+                    </div>
+                </div>
+
+                <!-- Content: Generator Judul -->
+                <div x-show="tab === 'generator'" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" style="display: none;">
+                    <!-- Step 1 -->
+                    <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-lg hover:shadow-xl transition-all duration-300 group relative overflow-hidden h-full">
+                        <div class="absolute -right-4 -top-4 w-20 h-20 bg-blue-50 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+                        <div class="w-12 h-12 bg-primary text-white rounded-2xl flex items-center justify-center font-black text-xl mb-6 relative z-10 shadow-lg shadow-blue-200">1</div>
+                        <h4 class="font-heading font-black text-lg text-slate-900 mb-3 relative z-10">Beli Paket</h4>
+                        <p class="text-slate-500 text-sm font-medium relative z-10 leading-relaxed">Kunjungi <span class="text-primary font-bold">lynk.id/dosbing.ai</span>, pilih paket yang diinginkan, dan selesaikan pembayaran.</p>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-lg hover:shadow-xl transition-all duration-300 group relative overflow-hidden h-full">
+                        <div class="absolute -right-4 -top-4 w-20 h-20 bg-blue-50 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+                        <div class="w-12 h-12 bg-primary text-white rounded-2xl flex items-center justify-center font-black text-xl mb-6 relative z-10 shadow-lg shadow-blue-200">2</div>
+                        <h4 class="font-heading font-black text-lg text-slate-900 mb-3 relative z-10">Konfirmasi ke Admin</h4>
+                        <p class="text-slate-500 text-sm font-medium relative z-10 leading-relaxed">Kirim screenshot bukti bayar ke WhatsApp Admin di nomor <span class="text-primary font-bold">0821-1187-09218</span>.</p>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-lg hover:shadow-xl transition-all duration-300 group relative overflow-hidden h-full">
+                        <div class="absolute -right-4 -top-4 w-20 h-20 bg-blue-50 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+                        <div class="w-12 h-12 bg-primary text-white rounded-2xl flex items-center justify-center font-black text-xl mb-6 relative z-10 shadow-lg shadow-blue-200">3</div>
+                        <h4 class="font-heading font-black text-lg text-slate-900 mb-3 relative z-10">Dapatkan Token</h4>
+                        <p class="text-slate-500 text-sm font-medium relative z-10 leading-relaxed">Admin akan memverifikasi pembayaran dan mengirimkan Kode Akses/Token (16 digit).</p>
+                    </div>
+                    <!-- Step 4 -->
+                    <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-lg hover:shadow-xl transition-all duration-300 group relative overflow-hidden h-full">
+                        <div class="absolute -right-4 -top-4 w-20 h-20 bg-blue-50 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+                        <div class="w-12 h-12 bg-primary text-white rounded-2xl flex items-center justify-center font-black text-xl mb-6 relative z-10 shadow-lg shadow-blue-200">4</div>
+                        <h4 class="font-heading font-black text-lg text-slate-900 mb-3 relative z-10">Mulai Penelitian</h4>
+                        <p class="text-slate-500 text-sm font-medium relative z-10 leading-relaxed">Buka situs <span class="text-primary font-bold">app.dosbing.ai</span>, masukkan token yang sudah diterima, lalu klik "Unlock" untuk memulai sesi.</p>
+                    </div>
+                </div>
+                
+                 <!-- Additional Info for Generator -->
+                 <div x-show="tab === 'generator'" class="mt-8 text-center bg-blue-50/50 p-6 rounded-3xl border border-blue-100 border-dashed" style="display: none;">
+                    <div class="flex flex-col md:flex-row items-center justify-center gap-4 text-slate-600 text-sm">
+                        <p class="font-bold"><i class="fas fa-exclamation-circle text-primary mr-2"></i> 1 Token = 1 Sesi: Kode akses hanya berlaku untuk satu kali sesi penelitian penuh.</p>
+                        <span class="hidden md:inline text-slate-300">|</span>
+                        <p class="font-bold"><i class="fas fa-save text-primary mr-2"></i> Unduh Hasil: Pastikan kamu menyimpan hasil akhir dalam format PDF sebelum menutup browser agar data penelitianmu tidak hilang.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section id="faq" class="py-16 md:py-32 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-3xl font-black text-slate-900 mb-2 uppercase tracking-widest">Pusat Bantuan</h2>
+                <div class="w-16 h-1.5 bg-secondary mx-auto rounded-full"></div>
+            </div>
+            
+            <div x-data="{ active: null }" class="space-y-6">
+                <!-- Item 1 -->
+                <div class="border border-slate-200 rounded-3xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-primary/30 shadow-sm" data-aos="fade-up">
+                    <button @click="active !== 1 ? active = 1 : active = null" class="w-full flex justify-between items-center p-8 text-left focus:outline-none bg-white font-bold">
+                        <span class="text-slate-900 text-base md:text-lg pr-4">Apakah format Kerangka Skripsi pasti sesuai dengan kampus saya?</span>
+                        <div class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-primary transition-transform duration-500 flex-shrink-0" :class="{ 'rotate-180 bg-primary text-white': active === 1 }">
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </div>
+                    </button>
+                    <div x-show="active === 1" x-collapse x-cloak>
+                        <div class="p-8 pt-0 text-slate-500 leading-relaxed font-medium bg-white">
+                            Ya! Database kami mencakup 6.632 Perguruan Tinggi dan 33.000+ Program Studi di Indonesia sesuai data PDDikti. Template yang kamu terima sudah termasuk logo kampus, margin, spasi, hingga daftar isi otomatis yang disesuaikan dengan pedoman umum kampusmu.
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="border border-slate-200 rounded-3xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-primary/30 shadow-sm" data-aos="fade-up">
+                    <button @click="active !== 2 ? active = 2 : active = null" class="w-full flex justify-between items-center p-8 text-left focus:outline-none bg-white font-bold">
+                        <span class="text-slate-900 text-base md:text-lg pr-4">Bagaimana cara menggunakan Kode Akses untuk Generator Judul?</span>
+                        <div class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-primary transition-transform duration-500 flex-shrink-0" :class="{ 'rotate-180 bg-primary text-white': active === 2 }">
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </div>
+                    </button>
+                    <div x-show="active === 2" x-collapse x-cloak>
+                        <div class="p-8 pt-0 text-slate-500 leading-relaxed font-medium bg-white">
+                            Setelah melakukan pembayaran ke Admin WA, kamu akan menerima 16 karakter kode unik. Buka aplikasi di app.dosbing.ai, masukkan kode tersebut, dan kamu bisa langsung memulai sesi pencarian judul hingga selesai.
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="border border-slate-200 rounded-3xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-primary/30 shadow-sm" data-aos="fade-up">
+                    <button @click="active !== 3 ? active = 3 : active = null" class="w-full flex justify-between items-center p-8 text-left focus:outline-none bg-white font-bold">
+                        <span class="text-slate-900 text-base md:text-lg pr-4">Apakah satu Kode Akses bisa digunakan berkali-kali?</span>
+                        <div class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-primary transition-transform duration-500 flex-shrink-0" :class="{ 'rotate-180 bg-primary text-white': active === 3 }">
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </div>
+                    </button>
+                    <div x-show="active === 3" x-collapse x-cloak>
+                        <div class="p-8 pt-0 text-slate-500 leading-relaxed font-medium bg-white">
+                            Tidak. Satu kode akses bersifat single-use (sekali pakai) untuk satu sesi pembuatan judul hingga menghasilkan PDF. Jika ingin membuat judul untuk topik yang berbeda, kamu perlu membeli kode akses baru.
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 4 -->
+                <div class="border border-slate-200 rounded-3xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-primary/30 shadow-sm" data-aos="fade-up">
+                    <button @click="active !== 4 ? active = 4 : active = null" class="w-full flex justify-between items-center p-8 text-left focus:outline-none bg-white font-bold">
+                        <span class="text-slate-900 text-base md:text-lg pr-4">Berapa lama proses pengiriman file Kerangka Skripsi?</span>
+                        <div class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-primary transition-transform duration-500 flex-shrink-0" :class="{ 'rotate-180 bg-primary text-white': active === 4 }">
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </div>
+                    </button>
+                    <div x-show="active === 4" x-collapse x-cloak>
+                        <div class="p-8 pt-0 text-slate-500 leading-relaxed font-medium bg-white">
+                            Setelah kamu mengirimkan bukti bayar dan data diri (Nama, NIM, Kampus, Prodi) ke WhatsApp Admin, file .docx akan dikirimkan maksimal 1x24 jam kerja. Namun, biasanya admin akan mengirimkannya jauh lebih cepat dari itu.
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 5 -->
+                <div class="border border-slate-200 rounded-3xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-primary/30 shadow-sm" data-aos="fade-up">
+                    <button @click="active !== 5 ? active = 5 : active = null" class="w-full flex justify-between items-center p-8 text-left focus:outline-none bg-white font-bold">
+                        <span class="text-slate-900 text-base md:text-lg pr-4">Apakah judul yang dihasilkan AI sudah pasti di-ACC dosen?</span>
+                        <div class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-primary transition-transform duration-500 flex-shrink-0" :class="{ 'rotate-180 bg-primary text-white': active === 5 }">
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </div>
+                    </button>
+                    <div x-show="active === 5" x-collapse x-cloak>
+                        <div class="p-8 pt-0 text-slate-500 leading-relaxed font-medium bg-white">
+                            Keputusan akhir tetap ada pada dosen pembimbing. Namun, judul dari Dosbing.ai sudah dilengkapi dengan Telaah Akademik 4 Pilar (Urgensi, Kebaruan, Kesesuaian, Kelayakan) yang kuat, sehingga kamu punya alasan ilmiah yang solid saat berargumen dengan dosen.
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 6 -->
+                <div class="border border-slate-200 rounded-3xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-primary/30 shadow-sm" data-aos="fade-up">
+                    <button @click="active !== 6 ? active = 6 : active = null" class="w-full flex justify-between items-center p-8 text-left focus:outline-none bg-white font-bold">
+                        <span class="text-slate-900 text-base md:text-lg pr-4">File apa yang akan saya dapatkan nantinya?</span>
+                        <div class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-primary transition-transform duration-500 flex-shrink-0" :class="{ 'rotate-180 bg-primary text-white': active === 6 }">
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </div>
+                    </button>
+                    <div x-show="active === 6" x-collapse x-cloak>
+                        <div class="p-8 pt-0 text-slate-500 leading-relaxed font-medium bg-white">
+                            Untuk Generator Judul, kamu akan mendapatkan file PDF super lengkap berisi <strong>Telaah Akademik 4 Pilar</strong> (Skor Validasi, Justifikasi, Argumentasi), rekomendasi judul, kerangka penelitian, hingga draf kuesioner. Untuk Kerangka Skripsi, kamu akan mendapatkan file Microsoft Word (.docx) yang siap kamu isi.
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 7 -->
+                <div class="border border-slate-200 rounded-3xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-primary/30 shadow-sm" data-aos="fade-up">
+                    <button @click="active !== 7 ? active = 7 : active = null" class="w-full flex justify-between items-center p-8 text-left focus:outline-none bg-white font-bold">
+                        <span class="text-slate-900 text-base md:text-lg pr-4">Apakah data saya aman?</span>
+                        <div class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-primary transition-transform duration-500 flex-shrink-0" :class="{ 'rotate-180 bg-primary text-white': active === 7 }">
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </div>
+                    </button>
+                    <div x-show="active === 7" x-collapse x-cloak>
+                        <div class="p-8 pt-0 text-slate-500 leading-relaxed font-medium bg-white">
+                            Sangat aman. Kami sangat menjaga privasi data akademik mahasiswa. Pembayaran pun dilakukan melalui platform resmi atau transfer yang terverifikasi.
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 8 -->
+                <div class="border border-slate-200 rounded-3xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-primary/30 shadow-sm" data-aos="fade-up">
+                    <button @click="active !== 8 ? active = 8 : active = null" class="w-full flex justify-between items-center p-8 text-left focus:outline-none bg-white font-bold">
+                        <span class="text-slate-900 text-base md:text-lg pr-4">Bagaimana jika kampus atau prodi saya tidak ditemukan di database?</span>
+                        <div class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-primary transition-transform duration-500 flex-shrink-0" :class="{ 'rotate-180 bg-primary text-white': active === 8 }">
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </div>
+                    </button>
+                    <div x-show="active === 8" x-collapse x-cloak>
+                        <div class="p-8 pt-0 text-slate-500 leading-relaxed font-medium bg-white">
+                            Tenang, jangan khawatir! Segera hubungi Admin via WhatsApp. Tim kami akan melakukan pengecekan manual dan jika memungkinkan, kami akan membuatkan template khusus untukmu tanpa biaya tambahan.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION (NEW) -->
+    <section id="contact" class="py-12 md:py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">Hubungi Kami</h2>
+                <div class="h-1.5 w-24 bg-gradient-to-r from-secondary to-primary mx-auto rounded-full mb-6"></div>
+                <p class="text-slate-500 font-medium max-w-2xl mx-auto leading-relaxed text-lg">Punya pertanyaan seputar produk atau butuh bantuan teknis? Tim support kami siap membantu Anda.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Contact Info Cards -->
+                <div class="space-y-6" data-aos="fade-right">
+                    <!-- WhatsApp Card -->
+                    <a href="https://wa.me/6282118709218" target="_blank" class="flex items-center gap-6 bg-white p-6 rounded-3xl border border-slate-100 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 group">
+                        <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center text-green-600 text-3xl shadow-inner group-hover:scale-110 transition-transform">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-black text-slate-900 mb-1">WhatsApp Admin</h4>
+                            <p class="text-slate-500 text-sm font-medium mb-1">Respon Cepat (09:00 - 21:00 WIB)</p>
+                            <p class="text-green-600 font-bold text-lg group-hover:underline">+62 821-1187-09218</p>
+                        </div>
+                    </a>
+
+                    <!-- Email Card -->
+                    <a href="mailto:dosbingai@gmail.com" class="flex items-center gap-6 bg-white p-6 rounded-3xl border border-slate-100 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 group">
+                        <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 text-3xl shadow-inner group-hover:scale-110 transition-transform">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-black text-slate-900 mb-1">Email Support</h4>
+                            <p class="text-slate-500 text-sm font-medium mb-1">Untuk Kerjasama & Pertanyaan Umum</p>
+                            <p class="text-blue-600 font-bold text-lg group-hover:underline">dosbingai@gmail.com</p>
+                        </div>
+                    </a>
+
+                    <!-- Location Card -->
+                    <div class="flex items-center gap-6 bg-white p-6 rounded-3xl border border-slate-100 shadow-lg group">
+                        <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-red-600 text-3xl shadow-inner">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-black text-slate-900 mb-1">Kantor Pusat</h4>
+                            <p class="text-slate-500 text-sm font-medium leading-relaxed">Cipinang, Cimaung, Kabupaten Bandung,<br>Jawa Barat 40374</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Google Maps Embed -->
+                <div class="bg-white p-3 sm:p-4 rounded-3xl border border-slate-100 shadow-xl min-h-[300px] sm:min-h-[400px] aspect-square sm:aspect-auto" data-aos="fade-left">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.957596286782!2d107.54585637499736!3d-7.014316992987154!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68eb63a016624d%3A0xc3952f08687719f9!2sCipinang%2C%20Cimaung%2C%20Bandung%20Regency%2C%20West%20Java!5e0!3m2!1sen!2sid!4v1708683451234!5m2!1sen!2sid" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0; border-radius: 1.5rem; min-height: 300px;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-white pt-16 pb-8 md:pt-32 md:pb-16 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 md:mb-24">
+                <h2 class="text-4xl md:text-6xl font-black mb-10 leading-tight" data-aos="fade-up">Siap Lulus Skripsi <br> <span class="text-secondary underline decoration-primary/50">Tahun Ini?</span></h2>
+                <a href="https://wa.me/6282118709218" class="inline-flex items-center gap-4 bg-secondary text-white px-12 py-6 rounded-3xl font-black text-xl shadow-3xl hover:bg-teal-500 transition-all transform hover:-translate-y-2 active:scale-95" data-aos="zoom-in">
+                    <i class="fab fa-whatsapp text-3xl"></i> Chat Admin Sekarang
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+                <div class="col-span-1 lg:col-span-2">
+                    <div class="flex items-center gap-3 mb-6">
+                        <img src="logo.png" alt="Dosbing.ai Footer Logo" class="h-10 w-auto" onerror="this.style.display='none'">
+                        <span class="font-heading font-black text-3xl text-white">Dosbing.ai</span>
+                    </div>
+                    <p class="text-slate-400 font-medium max-w-sm leading-relaxed mb-6">Teman Bimbingan Cerdas yang siap membantumu kapan saja, di mana saja. Fokus kami adalah membantumu lulus dengan kualitas akademik terbaik.</p>
+                </div>
+                <div>
+                    <h5 class="text-sm font-black uppercase tracking-widest text-secondary mb-8">Informasi</h5>
+                    <ul class="space-y-4 text-slate-400 text-sm font-bold">
+                        <li><a href="about.html" class="hover:text-white transition">Tentang Kami</a></li>
+                        <li><a href="#contact" class="hover:text-white transition">Hubungi Kami</a></li>
+                        <li><a href="privacy.html" class="hover:text-white transition">Kebijakan Privasi</a></li>
+                        <li><a href="terms.html" class="hover:text-white transition">Syarat & Ketentuan</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-sm font-black uppercase tracking-widest text-secondary mb-8">Kontak Kami</h5>
+                    <ul class="space-y-4 text-slate-400 text-sm font-medium">
+                        <li class="flex items-center gap-3"><i class="fas fa-envelope text-primary"></i> dosbingai@gmail.com</li>
+                        <li class="flex items-start gap-3 leading-relaxed"><i class="fas fa-location-dot text-primary mt-1"></i> Cipinang, Cimaung, Kab. Bandung, Jawa Barat</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-10 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-6">
+                <p class="text-slate-500 text-[10px] font-black uppercase tracking-widest">© 2026 Dosbing.ai. Member Of Bio Corp.</p>
+                <div class="flex gap-6 text-slate-400">
+                    <a href="https://www.instagram.com/dosbing.ai" target="_blank" class="hover:text-white transition"><i class="fab fa-instagram text-xl"></i></a>
+                    <a href="https://www.tiktok.com/@dosbing.ai?lang=en" target="_blank" class="hover:text-white transition"><i class="fab fa-tiktok text-xl"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // AOS Initializer
+        AOS.init({
+            duration: 1200,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 50
+        });
+
+        // Typing Effect Logic
+        const dynamicText = document.getElementById('typing-text');
+        const words = ['Mahasiswa Akhir', 'Pejuang Skripsi', 'Calon Sarjana', 'Siswa Ambis'];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function type() {
+            const currentWord = words[wordIndex];
+            if (isDeleting) {
+                dynamicText.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                dynamicText.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 40 : 100;
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                typeSpeed = 2500;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(type, typeSpeed);
+        }
+        setTimeout(type, 1000);
+    </script>
+</body>
+</html>
