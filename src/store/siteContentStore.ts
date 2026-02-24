@@ -47,8 +47,8 @@ const DEFAULT_CONTENT: SiteContent = {
         ],
     },
     hero: {
-        headline: 'Bimbingan Skripsi Berbasis AI',
-        subheadline: 'Dosbing.ai adalah asisten riset AI yang membantu mahasiswa Indonesia menyelesaikan skripsi dengan percaya diri — dari judul hingga kerangka.',
+        headline: 'Buntu Ide Judul?\nSelesai dalam 15 Menit.',
+        subheadline: 'Dosbing.ai hadir menyelamatkanmu dari writer\'s block. Dapatkan ide judul yang {typing} dan susun kerangka Bab 1-5 dalam hitungan menit. Mulai dari Rp 10rb aja! 🚀',
         ctaText: 'Mulai Sekarang',
         ctaLink: 'https://lynk.id/dosbing.ai',
         typingWords: ['Mahasiswa Akhir', 'Pejuang Skripsi', 'Calon Sarjana', 'Siswa Ambis'],

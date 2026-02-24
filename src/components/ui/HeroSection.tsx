@@ -99,28 +99,33 @@ const HeroSection = () => {
               🔥 Promo Spesial Mahasiswa
             </div>
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white leading-[1.08] mb-6 sm:mb-8">
-              Buntu Ide Judul? <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-cyan-300 to-blue-400">
-                Selesai dalam 15 Menit.
-              </span>
+              {content.hero.headline.split('\n').map((line, i) => (
+                <span key={i}>
+                  {i > 0 && <br />}
+                  {i === content.hero.headline.split('\n').length - 1 ? (
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-cyan-300 to-blue-400">
+                      {line}
+                    </span>
+                  ) : line}
+                </span>
+              ))}
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-white/80 font-medium mb-8 sm:mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-              Dosbing.ai hadir menyelamatkanmu dari <em>writer's block</em>. Dapatkan ide judul yang{' '}
+              {content.hero.subheadline.split('{typing}')[0]}
               <span className="text-white font-bold typing-cursor underline decoration-teal-400/50">
                 {text}
-              </span>{' '}
-              <br className="hidden sm:block" />
-              dan susun kerangka Bab 1-5 dalam hitungan menit. Mulai dari Rp 10rb aja! 🚀
+              </span>
+              {content.hero.subheadline.split('{typing}')[1] || ''}
             </p>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 sm:gap-5 mb-10">
               <a
-                href="https://lynk.id/dosbing.ai/nvynv9jqqjmj"
+                href={content.hero.ctaLink}
                 className="group w-full sm:w-auto px-8 py-4 sm:py-5 bg-gradient-to-r from-blue-500 to-teal-500 text-white text-sm sm:text-base font-black rounded-2xl hover:from-blue-600 hover:to-teal-600 transition-all shadow-[0_15px_30px_rgba(26,74,182,0.3)] transform hover:-translate-y-1 text-center flex items-center justify-center gap-3"
               >
                 <Wand2 className="group-hover:rotate-12 transition-transform flex-shrink-0" size={20} />
-                <span>Generator Judul Sekarang</span>
+                <span>{content.hero.ctaText}</span>
               </a>
               <a
                 href="https://lynk.id/dosbing.ai/6v9p194qxev9"
