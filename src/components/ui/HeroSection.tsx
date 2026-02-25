@@ -66,7 +66,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative pt-24 pb-12 sm:pt-32 sm:pb-16 md:pt-40 md:pb-24 lg:pt-52 lg:pb-32 hero-gradient overflow-hidden">
+    <section className="relative pt-8 pb-12 sm:pt-10 sm:pb-16 md:pt-14 md:pb-24 lg:pt-20 lg:pb-32 hero-gradient overflow-hidden">
       {/* Background textures */}
       <div className="absolute inset-0 opacity-[0.07] pointer-events-none" style={{ backgroundImage: "url('https://www.transparenttextures.com/patterns/carbon-fibre.png')" }}></div>
 
