@@ -32,13 +32,30 @@ const PricingSection = () => {
                 <FileText size={28} />
               </div>
               <h4 className="font-heading text-xl font-black text-slate-900 mb-2">Kerangka Skripsi</h4>
-              <p className="text-slate-500 text-sm mb-8 font-medium italic">Template Word (.docx) Profesional</p>
-              <ul className="space-y-4 mb-10 flex-grow text-sm font-bold text-slate-700 text-left">
-                <li className="flex items-start gap-3"><span className="w-6 h-6 rounded-lg bg-teal-500/10 text-teal-500 flex items-center justify-center flex-shrink-0 mt-0.5"><Check size={12} /></span> <span className="leading-tight">Sesuai Pedoman Kampus (Database PDDikti)</span></li>
-                <li className="flex items-start gap-3"><span className="w-6 h-6 rounded-lg bg-teal-500/10 text-teal-500 flex items-center justify-center flex-shrink-0 mt-0.5"><Check size={12} /></span> <span className="leading-tight">Format Rapi (Margin, Font, Spasi)</span></li>
-                <li className="flex items-start gap-3"><span className="w-6 h-6 rounded-lg bg-teal-500/10 text-teal-500 flex items-center justify-center flex-shrink-0 mt-0.5"><Check size={12} /></span> <span className="leading-tight">Daftar Isi & Tabel Otomatis</span></li>
-                <li className="flex items-start gap-3"><span className="w-6 h-6 rounded-lg bg-teal-500/10 text-teal-500 flex items-center justify-center flex-shrink-0 mt-0.5"><Check size={12} /></span> <span className="leading-tight">Lengkap dengan Logo Kampus</span></li>
-                <li className="flex items-start gap-3"><span className="w-6 h-6 rounded-lg bg-teal-500/10 text-teal-500 flex items-center justify-center flex-shrink-0 mt-0.5"><Check size={12} /></span> <span className="leading-tight">Praktis, Tinggal Isi Konten</span></li>
+              <p className="text-slate-500 text-sm mb-4 font-medium italic">Template Word (.docx) Profesional</p>
+
+              {/* Database Stats Bar */}
+              <div className="grid grid-cols-3 gap-2 mb-6 bg-gradient-to-r from-blue-50 to-teal-50 rounded-2xl p-3 border border-blue-100/50">
+                <div className="text-center">
+                  <p className="text-sm sm:text-base font-black text-blue-600 leading-none">6.632</p>
+                  <p className="text-[9px] font-bold text-slate-500 mt-0.5">Perguruan Tinggi</p>
+                </div>
+                <div className="text-center border-x border-blue-100">
+                  <p className="text-sm sm:text-base font-black text-teal-600 leading-none">33.000</p>
+                  <p className="text-[9px] font-bold text-slate-500 mt-0.5">Data Prodi</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-sm sm:text-base font-black text-blue-600 leading-none">27.000</p>
+                  <p className="text-[9px] font-bold text-slate-500 mt-0.5">Kerangka Skripsi</p>
+                </div>
+              </div>
+
+              <ul className="space-y-3.5 mb-10 flex-grow text-sm font-bold text-slate-700 text-left">
+                <li className="flex items-start gap-3"><span className="w-6 h-6 rounded-lg bg-teal-500/10 text-teal-500 flex items-center justify-center flex-shrink-0 mt-0.5"><Check size={12} /></span> <span className="leading-tight">Sesuai Pedoman Kampus — Database Terlengkap se-Indonesia, Data Sesuai PDDikti</span></li>
+                <li className="flex items-start gap-3"><span className="w-6 h-6 rounded-lg bg-teal-500/10 text-teal-500 flex items-center justify-center flex-shrink-0 mt-0.5"><Check size={12} /></span> <span className="leading-tight">Praktis, Tinggal Klik!</span></li>
+                <li className="flex items-start gap-3"><span className="w-6 h-6 rounded-lg bg-teal-500/10 text-teal-500 flex items-center justify-center flex-shrink-0 mt-0.5"><Check size={12} /></span> <span className="leading-tight">Lengkap dari Sampul — Sudah Ada Logo Kampus, Tinggal Ganti Nama Aja</span></li>
+                <li className="flex items-start gap-3"><span className="w-6 h-6 rounded-lg bg-teal-500/10 text-teal-500 flex items-center justify-center flex-shrink-0 mt-0.5"><Check size={12} /></span> <span className="leading-tight">Margin, No Halaman, Font, Spasi, Hingga Daftar Isi — Yang Biasanya Ribet, Udah Jadi!</span></li>
+                <li className="flex items-start gap-3"><span className="w-6 h-6 rounded-lg bg-teal-500/10 text-teal-500 flex items-center justify-center flex-shrink-0 mt-0.5"><Check size={12} /></span> <span className="leading-tight">Komplit, Tinggal Masukin Data Kamu Aja</span></li>
               </ul>
               <div className="mb-6 text-left mt-auto">
                 <span className="text-slate-300 line-through text-xs font-black">Rp 35.000</span>
