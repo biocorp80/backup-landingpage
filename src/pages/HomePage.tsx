@@ -4,6 +4,7 @@ import TrustSection from '../components/ui/StatsSection';
 import WhyChooseUsSection from '../components/ui/WhyChooseUsSection';
 import ProblemSolutionSection from '../components/ui/ProblemSolutionSection';
 import AcademicPillarsSection from '../components/ui/AcademicPillarsSection';
+import SkripsiTemplateFeaturesSection from '../components/ui/SkripsiTemplateFeaturesSection';
 import ProductShowcaseSection from '../components/ui/ProductShowcaseSection';
 import PricingSection from '../components/ui/PricingSection';
 import TestimonialSection from '../components/ui/TestimonialSection';
@@ -22,11 +23,11 @@ const HomePage = () => {
       <WhyChooseUsSection />
       <ProblemSolutionSection />
       <AcademicPillarsSection />
+      <SkripsiTemplateFeaturesSection />
       <ProductShowcaseSection />
+      <HowItWorksSection />
       <PricingSection />
       <TestimonialSection />
-
-      <HowItWorksSection />
       <LatestBlogSection />
       <FAQSection />
       <ContactSection />

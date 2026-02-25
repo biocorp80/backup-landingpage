@@ -21,7 +21,7 @@ const TermsPage = () => {
               Syarat dan Ketentuan <br />
               <span className="text-primary">Penggunaan Dosbing.ai</span>
             </h1>
-            
+
             <p className="text-slate-600 mb-8 leading-relaxed">
               Selamat datang di Dosbing.ai. Dengan mengakses atau membeli produk kami, Anda dianggap telah membaca, memahami, dan menyetujui seluruh syarat dan ketentuan di bawah ini:
             </p>
@@ -86,7 +86,7 @@ const TermsPage = () => {
                 <h3 className="text-xl font-bold text-slate-900 mb-4">6. Kontak dan Bantuan</h3>
                 <p className="text-slate-600 leading-relaxed mb-2">Segala bentuk kendala teknis atau pertanyaan lebih lanjut dapat disampaikan melalui:</p>
                 <ul className="list-disc pl-6 space-y-2 text-slate-600 leading-relaxed">
-                  <li><strong>WhatsApp Admin:</strong> 0821-1187-09218.</li>
+                  <li><strong>WhatsApp Admin:</strong> 0821-1870-9218.</li>
                   <li><strong>Waktu Operasional:</strong> Pengiriman file diproses maksimal 1x24 jam kerja setelah konfirmasi.</li>
                 </ul>
               </div>

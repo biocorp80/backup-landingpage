@@ -181,7 +181,7 @@ const TestimonialSection = () => {
                 {/* Stats summary */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
                     {[
-                        { angka: '500+', label: 'Pengguna Aktif', color: 'text-blue-400' },
+                        { angka: '2.500+', label: 'Pengguna Aktif', color: 'text-blue-400' },
                         { angka: '4.9/5', label: 'Rating Kepuasan', color: 'text-teal-400' },
                         { angka: '98%', label: 'Judul Disetujui', color: 'text-blue-400' },
                         { angka: '<15 min', label: 'Waktu Proses', color: 'text-teal-400' },

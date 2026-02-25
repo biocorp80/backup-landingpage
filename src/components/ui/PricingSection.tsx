@@ -199,7 +199,7 @@ const PricingSection = () => {
                 ))}
               </div>
               <div className="text-left">
-                <p className="text-white font-bold text-sm">⭐ 4.9/5 dari 500+ pengguna</p>
+                <p className="text-white font-bold text-sm">⭐ 4.9/5 dari 2.500+ pengguna</p>
                 <p className="text-white/50 text-xs mt-1">Sudah ratusan mahasiswa terbantu!</p>
               </div>
               <p className="text-white/50 text-xs font-medium leading-relaxed max-w-xs">
