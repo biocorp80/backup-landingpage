@@ -155,37 +155,7 @@ const PricingSection = () => {
           </div>
         </div>
 
-        {/* Bundle Parsel Skripsi CTA */}
-        <div className="mt-14 max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="450">
-          <div className="rounded-[2rem] p-[2px] bg-gradient-to-r from-blue-400 via-teal-500 to-blue-400">
-            <div className="bg-slate-900 rounded-[1.9rem] p-6 sm:p-10 flex flex-col md:flex-row items-center gap-6 md:gap-10">
-              <div className="flex-1 text-center md:text-left">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-black uppercase tracking-widest mb-4">
-                  🎁 Bundling Hemat
-                </div>
-                <h3 className="text-2xl sm:text-3xl font-black text-white mb-2">
-                  Parsel Skripsi <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 to-blue-400">(Judul + Kerangka)</span>
-                </h3>
-                <p className="text-white/50 text-sm mb-4 max-w-lg">
-                  Beli bundling = hemat lebih banyak! Dapatkan Generator Judul + Template Kerangka Skripsi dalam satu paket. Tinggal duduk manis, skripsimu beres.
-                </p>
-                <div className="flex items-center gap-3 justify-center md:justify-start">
-                  <span className="text-white/30 line-through text-sm font-bold">Rp 70.000</span>
-                  <span className="text-3xl sm:text-4xl font-black text-teal-400">Rp 25.000</span>
-                  <span className="px-2 py-1 bg-red-500/20 text-red-400 text-[10px] font-black rounded-lg uppercase">Hemat 64%</span>
-                </div>
-              </div>
-              <a
-                href="https://wa.me/6282118709218?text=Halo%20Admin%20Dosbing.ai%2C%20saya%20mau%20pesan%20Parsel%20Skripsi%20(Judul%2BKerangka)%20harga%20promo%2025rb."
-                target="_blank"
-                rel="noreferrer"
-                className="w-full md:w-auto px-10 py-5 bg-gradient-to-r from-blue-500 to-teal-500 text-white font-black text-base rounded-2xl shadow-2xl hover:from-blue-600 hover:to-teal-600 transition-all transform hover:-translate-y-1 text-center whitespace-nowrap"
-              >
-                Ambil Parsel 🎁
-              </a>
-            </div>
-          </div>
-        </div>
+        {/* Bundle Parsel Skripsi CTA - Hidden for now */}
 
         {/* Social Proof / Guarantee Bar */}
         <div className="mt-16 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="500">
