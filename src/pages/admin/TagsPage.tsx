@@ -54,13 +54,13 @@ const TagsPage = () => {
                     {items.map((tag) => (
                         <div
                             key={tag.id}
-                            className="group flex items-center gap-2 px-4 py-2.5 bg-slate-50 rounded-xl border border-slate-100 hover:border-red-200 transition"
+                            className="group flex items-center gap-2 px-4 py-2.5 bg-slate-100 rounded-xl border border-slate-200 hover:border-red-300 transition"
                         >
                             <span className="text-sm font-bold text-slate-700">#{tag.name}</span>
-                            <span className="text-[10px] text-slate-400 font-medium">/{tag.slug}</span>
+                            <span className="text-[10px] text-slate-400 font-medium hidden sm:inline">/{tag.slug}</span>
                             <button
                                 onClick={() => removeTag(tag.id)}
-                                className="ml-1 w-5 h-5 rounded-full bg-transparent group-hover:bg-red-100 flex items-center justify-center text-transparent group-hover:text-red-500 transition"
+                                className="ml-1 w-5 h-5 rounded-full bg-slate-200 hover:bg-red-100 flex items-center justify-center text-slate-400 hover:text-red-500 transition"
                             >
                                 <X size={12} />
                             </button>

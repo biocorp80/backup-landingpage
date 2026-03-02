@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Save, Loader2, Shield } from 'lucide-react';
+import { Save, Loader2, Shield, UserCircle } from 'lucide-react';
 import { useAuthStore } from '../../store/authStore';
 
 const ProfilePage = () => {
@@ -42,10 +42,13 @@ const ProfilePage = () => {
 
     return (
         <div className="max-w-2xl mx-auto space-y-6">
-            <h2 className="text-xl font-black text-slate-900">Profil Admin</h2>
 
             {/* Profile Info */}
             <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 space-y-5">
+                <div className="flex items-center gap-2 mb-4">
+                    <UserCircle size={16} className="text-teal-500" />
+                    <p className="text-xs font-black uppercase tracking-widest text-slate-400">Informasi Profil</p>
+                </div>
                 <div className="flex items-center gap-4 mb-4">
                     <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-teal-500 flex items-center justify-center text-white text-2xl font-black">
                         {user?.avatar ?? 'A'}

@@ -5,6 +5,7 @@ import WhyChooseUsSection from '../components/ui/WhyChooseUsSection';
 import ProblemSolutionSection from '../components/ui/ProblemSolutionSection';
 import AcademicPillarsSection from '../components/ui/AcademicPillarsSection';
 import SkripsiTemplateFeaturesSection from '../components/ui/SkripsiTemplateFeaturesSection';
+import OutlineFeaturesSection from '../components/ui/OutlineFeaturesSection';
 import ProductShowcaseSection from '../components/ui/ProductShowcaseSection';
 import PricingSection from '../components/ui/PricingSection';
 import TestimonialSection from '../components/ui/TestimonialSection';
@@ -24,6 +25,7 @@ const HomePage = () => {
       <ProblemSolutionSection />
       <AcademicPillarsSection />
       <SkripsiTemplateFeaturesSection />
+      <OutlineFeaturesSection />
       <ProductShowcaseSection />
       <HowItWorksSection />
       <PricingSection />

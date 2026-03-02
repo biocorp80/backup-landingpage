@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plus, PenLine, Trash2, X } from 'lucide-react';
+import { Plus, PenLine, Trash2, X, FolderOpen } from 'lucide-react';
 import { categories as initialCategories, Category } from '../../data/categories';
 
 const CategoriesPage = () => {
@@ -37,6 +37,9 @@ const CategoriesPage = () => {
     const colorMap: Record<string, string> = {
         teal: 'bg-teal-500', blue: 'bg-blue-500', violet: 'bg-violet-500', cyan: 'bg-cyan-500', orange: 'bg-orange-500',
     };
+    const borderColorMap: Record<string, string> = {
+        teal: 'border-l-teal-500', blue: 'border-l-blue-500', violet: 'border-l-violet-500', cyan: 'border-l-cyan-500', orange: 'border-l-orange-500',
+    };
 
     return (
         <div className="space-y-6">
@@ -52,18 +55,18 @@ const CategoriesPage = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {items.map((cat) => (
-                    <div key={cat.id} className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 hover:shadow-md transition">
+                    <div key={cat.id} className={`bg-white rounded-2xl border border-slate-100 shadow-sm p-5 hover:shadow-md transition border-l-4 ${borderColorMap[cat.color] ?? 'border-l-slate-300'}`}>
                         <div className="flex items-start justify-between mb-3">
                             <div className="flex items-center gap-3">
                                 <div className={`w-3 h-3 rounded-full ${colorMap[cat.color]}`} />
                                 <h3 className="font-black text-slate-900">{cat.name}</h3>
                             </div>
-                            <div className="flex gap-1">
-                                <button onClick={() => openEdit(cat)} className="w-7 h-7 rounded-lg bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-blue-50 hover:text-blue-600 transition">
-                                    <PenLine size={13} />
+                            <div className="flex gap-1.5">
+                                <button onClick={() => openEdit(cat)} className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-blue-100 hover:text-blue-600 transition">
+                                    <PenLine size={14} />
                                 </button>
-                                <button onClick={() => remove(cat.id)} className="w-7 h-7 rounded-lg bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-red-50 hover:text-red-600 transition">
-                                    <Trash2 size={13} />
+                                <button onClick={() => remove(cat.id)} className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-red-100 hover:text-red-600 transition">
+                                    <Trash2 size={14} />
                                 </button>
                             </div>
                         </div>
@@ -71,6 +74,13 @@ const CategoriesPage = () => {
                         <p className="text-sm text-slate-500">{cat.description}</p>
                     </div>
                 ))}
+                {items.length === 0 && (
+                    <div className="col-span-full text-center py-12">
+                        <FolderOpen className="mx-auto text-slate-300 mb-3" size={40} />
+                        <p className="text-slate-400 font-bold">Belum ada kategori.</p>
+                        <button onClick={openNew} className="mt-3 text-sm text-teal-600 font-bold hover:underline">+ Tambah Kategori Pertama</button>
+                    </div>
+                )}
             </div>
 
             {/* Modal */}

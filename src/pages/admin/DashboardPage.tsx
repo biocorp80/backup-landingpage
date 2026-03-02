@@ -1,19 +1,22 @@
 import { Link } from 'react-router-dom';
-import { FileText, FolderOpen, Tag, Eye, PenLine, TrendingUp, Users, Clock } from 'lucide-react';
+import { FileText, FolderOpen, Tag, Eye, PenLine, TrendingUp, Users, Clock, ArrowUpRight } from 'lucide-react';
 import { blogPosts } from '../../data/blog-posts';
 import { categories } from '../../data/categories';
 import { tags } from '../../data/tags';
+import { useAuthStore } from '../../store/authStore';
 
 const DashboardPage = () => {
+    const { user } = useAuthStore();
     const published = blogPosts.filter((p) => p.status === 'published').length;
     const drafts = blogPosts.filter((p) => p.status === 'draft').length;
+    const today = new Date().toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
 
     const stats = [
-        { label: 'Total Artikel', value: blogPosts.length, icon: FileText, color: 'bg-blue-500', link: '/admin/blog' },
-        { label: 'Published', value: published, icon: Eye, color: 'bg-teal-500', link: '/admin/blog' },
-        { label: 'Draft', value: drafts, icon: PenLine, color: 'bg-amber-500', link: '/admin/blog' },
-        { label: 'Kategori', value: categories.length, icon: FolderOpen, color: 'bg-violet-500', link: '/admin/categories' },
-        { label: 'Tags', value: tags.length, icon: Tag, color: 'bg-cyan-500', link: '/admin/tags' },
+        { label: 'Total Artikel', value: blogPosts.length, icon: FileText, color: 'bg-blue-500', link: '/admin/blog', trend: '+3' },
+        { label: 'Published', value: published, icon: Eye, color: 'bg-teal-500', link: '/admin/blog', trend: '+2' },
+        { label: 'Draft', value: drafts, icon: PenLine, color: 'bg-amber-500', link: '/admin/blog', trend: '+1' },
+        { label: 'Kategori', value: categories.length, icon: FolderOpen, color: 'bg-violet-500', link: '/admin/categories', trend: '0' },
+        { label: 'Tags', value: tags.length, icon: Tag, color: 'bg-cyan-500', link: '/admin/tags', trend: '+5' },
     ];
 
     const recentPosts = blogPosts.slice(0, 5);
@@ -21,9 +24,14 @@ const DashboardPage = () => {
     return (
         <div className="space-y-8">
             {/* Welcome */}
-            <div className="bg-gradient-to-r from-blue-600 to-teal-600 rounded-2xl p-6 md:p-8 text-white">
-                <h2 className="text-2xl font-black mb-1">Selamat Datang, Admin! 👋</h2>
-                <p className="text-white/70 text-sm">Kelola konten Dosbing.ai dari dashboard ini.</p>
+            <div className="bg-gradient-to-r from-blue-600 via-blue-700 to-teal-600 rounded-2xl p-6 md:p-8 text-white relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -mr-10 -mt-10"></div>
+                <div className="absolute bottom-0 left-1/2 w-32 h-32 bg-white/5 rounded-full -mb-16"></div>
+                <div className="relative z-10">
+                    <h2 className="text-2xl font-black mb-1">Selamat Datang, {user?.name ?? 'Admin'}! 👋</h2>
+                    <p className="text-white/60 text-sm">{today}</p>
+                    <p className="text-white/80 text-sm mt-2">Kelola konten Dosbing.ai dari dashboard ini.</p>
+                </div>
             </div>
 
             {/* Stats Grid */}
@@ -37,7 +45,10 @@ const DashboardPage = () => {
                         <div className={`w-10 h-10 ${s.color} rounded-xl flex items-center justify-center text-white mb-3 group-hover:scale-110 transition-transform`}>
                             <s.icon size={18} />
                         </div>
-                        <p className="text-2xl font-black text-slate-900">{s.value}</p>
+                        <div className="flex items-baseline gap-2">
+                            <p className="text-2xl font-black text-slate-900">{s.value}</p>
+                            {s.trend !== '0' && <span className="text-[10px] font-bold text-teal-600 flex items-center"><ArrowUpRight size={10} />{s.trend}</span>}
+                        </div>
                         <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">{s.label}</p>
                     </Link>
                 ))}
@@ -124,7 +135,7 @@ const DashboardPage = () => {
                         { label: 'Rata-rata Waktu Baca', value: '4.2 mnt', icon: Clock, color: 'text-violet-500' },
                         { label: 'Konversi CTA', value: '12.4%', icon: TrendingUp, color: 'text-orange-500' },
                     ].map((m) => (
-                        <div key={m.label} className="text-center p-4 rounded-xl bg-slate-50">
+                        <div key={m.label} className="text-center p-4 rounded-xl bg-slate-50 border-l-4" style={{ borderColor: m.color.replace('text-', '').includes('blue') ? '#3b82f6' : m.color.includes('teal') ? '#14b8a6' : m.color.includes('violet') ? '#8b5cf6' : '#f97316' }}>
                             <m.icon className={`mx-auto mb-2 ${m.color}`} size={20} />
                             <p className="text-xl font-black text-slate-900">{m.value}</p>
                             <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">{m.label}</p>

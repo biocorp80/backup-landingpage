@@ -1,4 +1,4 @@
-import { Youtube, FileText } from 'lucide-react';
+import { Youtube, FileText, ListChecks } from 'lucide-react';
 
 const ProductShowcaseSection = () => {
   return (
@@ -10,14 +10,14 @@ const ProductShowcaseSection = () => {
             Kenali Lebih Dekat <span className="text-teal-600">Produk Kami.</span>
           </h2>
           <p className="text-slate-500 font-medium max-w-2xl mx-auto text-lg">
-            Lihat langsung cara kerja produk kami — dari generate judul skripsi hingga template kerangka skripsi yang siap pakai.
+            Lihat langsung cara kerja produk kami — dari generate judul skripsi, template kerangka, hingga outline skripsi otomatis.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch mb-12">
 
           {/* Generator Judul Skripsi */}
-          <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100 flex flex-col" data-aos="fade-right">
+          <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100 flex flex-col" data-aos="fade-up" data-aos-delay="0">
             <div className="relative pb-[56.25%] h-0 bg-black">
               <iframe
                 className="absolute top-0 left-0 w-full h-full"
@@ -28,19 +28,19 @@ const ProductShowcaseSection = () => {
                 allowFullScreen
               ></iframe>
             </div>
-            <div className="p-8 flex-grow">
+            <div className="p-6 lg:p-8 flex-grow">
               <div className="w-12 h-12 bg-red-100 text-red-600 rounded-xl flex items-center justify-center mb-4">
                 <Youtube size={24} />
               </div>
-              <h3 className="font-bold text-2xl text-slate-900 mb-3">Generator Judul Skripsi</h3>
-              <p className="text-slate-500 leading-relaxed">
-                Saksikan bagaimana mudahnya menggunakan Generator Judul Dosbing.ai untuk menemukan topik penelitian yang tepat dan valid secara akademik dalam hitungan menit.
+              <h3 className="font-bold text-xl lg:text-2xl text-slate-900 mb-3">Generator Judul Skripsi</h3>
+              <p className="text-slate-500 leading-relaxed text-sm lg:text-base">
+                Saksikan bagaimana mudahnya menggunakan Generator Judul untuk menemukan topik penelitian yang tepat dalam hitungan menit.
               </p>
             </div>
           </div>
 
           {/* Template Kerangka Skripsi */}
-          <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100 flex flex-col" data-aos="fade-left">
+          <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100 flex flex-col" data-aos="fade-up" data-aos-delay="100">
             <div className="relative pb-[56.25%] h-0 bg-black">
               <iframe
                 className="absolute top-0 left-0 w-full h-full"
@@ -51,13 +51,33 @@ const ProductShowcaseSection = () => {
                 allowFullScreen
               ></iframe>
             </div>
-            <div className="p-8 flex-grow">
+            <div className="p-6 lg:p-8 flex-grow">
               <div className="w-12 h-12 bg-teal-100 text-teal-600 rounded-xl flex items-center justify-center mb-4">
                 <FileText size={24} />
               </div>
-              <h3 className="font-bold text-2xl text-slate-900 mb-3">Template Kerangka Skripsi</h3>
-              <p className="text-slate-500 leading-relaxed">
-                Lihat langsung hasil template kerangka skripsi dari Dosbing.ai — format rapi, sesuai pedoman akademik, dan siap pakai untuk skripsimu.
+              <h3 className="font-bold text-xl lg:text-2xl text-slate-900 mb-3">Template Kerangka Skripsi</h3>
+              <p className="text-slate-500 leading-relaxed text-sm lg:text-base">
+                Lihat langsung hasil template kerangka skripsi — format rapi, sesuai pedoman akademik, dan siap pakai.
+              </p>
+            </div>
+          </div>
+
+          {/* Outline Skripsi Otomatis */}
+          <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-orange-100 flex flex-col ring-2 ring-orange-200/50" data-aos="fade-up" data-aos-delay="200">
+            <div className="relative pb-[56.25%] h-0 bg-gradient-to-br from-orange-500 to-amber-500">
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-6 text-center">
+                <ListChecks size={48} className="mb-4 opacity-90" />
+                <p className="font-black text-lg">Outline Skripsi Otomatis</p>
+                <p className="text-white/80 text-sm mt-1">Video segera hadir</p>
+              </div>
+            </div>
+            <div className="p-6 lg:p-8 flex-grow">
+              <div className="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center mb-4">
+                <ListChecks size={24} />
+              </div>
+              <h3 className="font-bold text-xl lg:text-2xl text-slate-900 mb-3">Outline Skripsi Otomatis</h3>
+              <p className="text-slate-500 leading-relaxed text-sm lg:text-base">
+                Input judul skripsimu, dapatkan outline Bab 1 – Bab 3 secara otomatis — lengkap dengan panduan isi tiap sub-bab.
               </p>
             </div>
           </div>
@@ -75,10 +95,10 @@ const ProductShowcaseSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
 
           {/* Tutorial Pembelian Kerangka Skripsi */}
-          <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100 flex flex-col" data-aos="fade-right">
+          <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100 flex flex-col" data-aos="fade-up" data-aos-delay="0">
             <div className="relative pb-[56.25%] h-0 bg-black">
               <iframe
                 className="absolute top-0 left-0 w-full h-full"
@@ -89,19 +109,19 @@ const ProductShowcaseSection = () => {
                 allowFullScreen
               ></iframe>
             </div>
-            <div className="p-8 flex-grow">
-              <div className="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center mb-4">
+            <div className="p-6 lg:p-8 flex-grow">
+              <div className="w-12 h-12 bg-violet-100 text-violet-600 rounded-xl flex items-center justify-center mb-4">
                 <Youtube size={24} />
               </div>
-              <h3 className="font-bold text-2xl text-slate-900 mb-3">Tutorial Pembelian Kerangka Skripsi</h3>
-              <p className="text-slate-500 leading-relaxed">
+              <h3 className="font-bold text-xl lg:text-2xl text-slate-900 mb-3">Tutorial Pembelian Kerangka Skripsi</h3>
+              <p className="text-slate-500 leading-relaxed text-sm lg:text-base">
                 Panduan langkah demi langkah cara membeli template kerangka skripsi di Dosbing.ai dengan mudah dan cepat.
               </p>
             </div>
           </div>
 
           {/* Tutorial Pembelian Generator Judul */}
-          <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100 flex flex-col" data-aos="fade-left">
+          <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100 flex flex-col" data-aos="fade-up" data-aos-delay="100">
             <div className="relative pb-[56.25%] h-0 bg-black">
               <iframe
                 className="absolute top-0 left-0 w-full h-full"
@@ -112,13 +132,33 @@ const ProductShowcaseSection = () => {
                 allowFullScreen
               ></iframe>
             </div>
-            <div className="p-8 flex-grow">
-              <div className="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mb-4">
+            <div className="p-6 lg:p-8 flex-grow">
+              <div className="w-12 h-12 bg-teal-100 text-teal-600 rounded-xl flex items-center justify-center mb-4">
                 <Youtube size={24} />
               </div>
-              <h3 className="font-bold text-2xl text-slate-900 mb-3">Tutorial Pembelian Generator Judul</h3>
-              <p className="text-slate-500 leading-relaxed">
-                Panduan lengkap cara membeli akses Generator Judul Skripsi di Dosbing.ai — proses cepat dan langsung bisa digunakan.
+              <h3 className="font-bold text-xl lg:text-2xl text-slate-900 mb-3">Tutorial Pembelian Generator Judul</h3>
+              <p className="text-slate-500 leading-relaxed text-sm lg:text-base">
+                Panduan lengkap cara membeli akses Generator Judul Skripsi — proses cepat dan langsung bisa digunakan.
+              </p>
+            </div>
+          </div>
+
+          {/* Tutorial Pembelian Outline Skripsi */}
+          <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-orange-100 flex flex-col ring-2 ring-orange-200/50" data-aos="fade-up" data-aos-delay="200">
+            <div className="relative pb-[56.25%] h-0 bg-gradient-to-br from-orange-500 to-amber-500">
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-6 text-center">
+                <ListChecks size={48} className="mb-4 opacity-90" />
+                <p className="font-black text-lg">Tutorial Pembelian</p>
+                <p className="text-white/80 text-sm mt-1">Video segera hadir</p>
+              </div>
+            </div>
+            <div className="p-6 lg:p-8 flex-grow">
+              <div className="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center mb-4">
+                <Youtube size={24} />
+              </div>
+              <h3 className="font-bold text-xl lg:text-2xl text-slate-900 mb-3">Tutorial Pembelian Outline Skripsi</h3>
+              <p className="text-slate-500 leading-relaxed text-sm lg:text-base">
+                Panduan cara membeli outline skripsi otomatis di Dosbing.ai — input judul, bayar, dan terima outline langsung.
               </p>
             </div>
           </div>

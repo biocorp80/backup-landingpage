@@ -64,8 +64,8 @@ const BlogManagePage = () => {
                             key={s}
                             onClick={() => setStatusFilter(s)}
                             className={`px-3 py-2 rounded-lg text-xs font-bold transition ${statusFilter === s
-                                    ? 'bg-slate-900 text-white'
-                                    : 'bg-white border border-slate-200 text-slate-500 hover:border-slate-300'
+                                ? 'bg-slate-900 text-white'
+                                : 'bg-white border border-slate-200 text-slate-500 hover:border-slate-300'
                                 }`}
                         >
                             {s === 'all' ? 'Semua' : s === 'published' ? 'Published' : 'Draft'}
@@ -93,8 +93,8 @@ const BlogManagePage = () => {
                                 return (
                                     <tr key={post.id} className="border-b border-slate-50 hover:bg-slate-50/50 transition">
                                         <td className="px-6 py-4">
-                                            <div className="flex items-center gap-3">
-                                                <img src={post.coverImage} alt="" className="w-10 h-10 rounded-lg object-cover flex-shrink-0" />
+                                            <div className="flex items-center gap-4">
+                                                <img src={post.coverImage} alt="" className="w-14 h-14 rounded-xl object-cover flex-shrink-0 shadow-sm" />
                                                 <div className="min-w-0">
                                                     <p className="font-bold text-slate-900 truncate max-w-xs">{post.title}</p>
                                                     <p className="text-[10px] text-slate-400 mt-0.5">{post.readingTime} menit baca</p>
@@ -109,11 +109,12 @@ const BlogManagePage = () => {
                                         <td className="px-4 py-4">
                                             <button
                                                 onClick={() => toggleStatus(post.id)}
-                                                className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider transition cursor-pointer ${post.status === 'published'
-                                                        ? 'bg-teal-50 text-teal-600 hover:bg-teal-100'
-                                                        : 'bg-amber-50 text-amber-600 hover:bg-amber-100'
+                                                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider transition cursor-pointer ${post.status === 'published'
+                                                    ? 'bg-teal-100 text-teal-700 hover:bg-teal-200'
+                                                    : 'bg-amber-100 text-amber-700 hover:bg-amber-200'
                                                     }`}
                                             >
+                                                <span className={`w-1.5 h-1.5 rounded-full ${post.status === 'published' ? 'bg-teal-500' : 'bg-amber-500'}`}></span>
                                                 {post.status}
                                             </button>
                                         </td>
@@ -151,8 +152,10 @@ const BlogManagePage = () => {
                             })}
                             {filtered.length === 0 && (
                                 <tr>
-                                    <td colSpan={5} className="px-6 py-16 text-center text-slate-400 font-medium">
-                                        Tidak ada artikel ditemukan.
+                                    <td colSpan={5} className="px-6 py-16 text-center">
+                                        <Search className="mx-auto text-slate-300 mb-3" size={32} />
+                                        <p className="text-slate-400 font-bold">Tidak ada artikel ditemukan.</p>
+                                        <p className="text-slate-300 text-xs mt-1">Coba ubah filter atau kata kunci pencarian.</p>
                                     </td>
                                 </tr>
                             )}

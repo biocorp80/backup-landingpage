@@ -88,7 +88,6 @@ const MediaManagerPage = () => {
         <div className="max-w-5xl mx-auto space-y-6">
             {/* Header */}
             <div>
-                <h2 className="text-xl font-black text-slate-900">Media Manager</h2>
                 <p className="text-sm text-slate-400">Upload dan kelola foto & musik untuk website</p>
             </div>
 

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import {
     LayoutDashboard, FileText, Tag, FolderOpen, Layout, User,
-    LogOut, Menu, X, Wand2, ChevronRight, BarChart3, Image
+    LogOut, Menu, X, Wand2, ChevronRight, BarChart3, Image, ExternalLink
 } from 'lucide-react';
 import { useAuthStore } from '../../store/authStore';
 
@@ -51,11 +51,11 @@ const AdminLayout = () => {
                             to={to}
                             onClick={() => setSidebarOpen(false)}
                             className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all ${isActive
-                                ? 'bg-white/10 text-white'
+                                ? 'bg-teal-500/15 text-white shadow-sm'
                                 : 'text-white/50 hover:bg-white/5 hover:text-white/80'
                                 }`}
                         >
-                            <Icon size={17} />
+                            <Icon size={17} className={isActive ? 'text-teal-400' : ''} />
                             <span>{label}</span>
                             {isActive && <ChevronRight size={14} className="ml-auto text-teal-400" />}
                         </Link>
@@ -120,9 +120,9 @@ const AdminLayout = () => {
                         <Link
                             to="/"
                             target="_blank"
-                            className="text-xs text-slate-500 font-bold hover:text-teal-600 transition"
+                            className="flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-xl border border-slate-200 text-slate-600 hover:bg-teal-50 hover:text-teal-700 hover:border-teal-200 transition-all"
                         >
-                            ← Lihat Live Site
+                            <ExternalLink size={13} /> Lihat Live Site
                         </Link>
                     </div>
                 </header>

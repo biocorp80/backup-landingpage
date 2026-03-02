@@ -105,7 +105,6 @@ const VisitorAnalyticsPage = () => {
             {/* Header */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div>
-                    <h2 className="text-xl font-black text-slate-900">Visitor Analytics</h2>
                     <p className="text-sm text-slate-400">Monitor pengunjung website secara real-time</p>
                 </div>
                 <button onClick={() => { if (confirm('Hapus semua data visitor?')) clearVisitors(); }} className="flex items-center gap-2 px-4 py-2.5 border border-red-200 text-red-500 text-sm font-bold rounded-xl hover:bg-red-50 transition">
@@ -132,219 +131,231 @@ const VisitorAnalyticsPage = () => {
                 ))}
             </div>
 
-            {/* Tabs */}
-            <div className="flex gap-2">
-                {(['overview', 'log', 'devices'] as const).map((t) => (
-                    <button
-                        key={t}
-                        onClick={() => setTab(t)}
-                        className={`px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition ${tab === t ? 'bg-slate-900 text-white' : 'bg-white border border-slate-200 text-slate-500 hover:border-slate-300'}`}
-                    >
-                        {t === 'overview' ? '📊 Overview' : t === 'log' ? '📋 Log Visitor' : '📱 Devices'}
-                    </button>
-                ))}
-            </div>
-
-            {/* Tab Content */}
-            {tab === 'overview' && (
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    {/* Hourly Traffic Chart */}
-                    <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
-                        <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-4">⏰ Distribusi Jam Kunjungan</p>
-                        <div className="flex items-end gap-1 h-40">
-                            {hourlyDist.map((count, i) => (
-                                <div key={i} className="flex-1 flex flex-col items-center gap-1">
-                                    <div
-                                        className="w-full bg-gradient-to-t from-teal-500 to-blue-500 rounded-t-sm transition-all hover:from-teal-400 hover:to-blue-400 min-h-[2px]"
-                                        style={{ height: `${(count / maxHourly) * 100}%` }}
-                                        title={`${String(i).padStart(2, '0')}:00 — ${count} visits`}
-                                    />
-                                    {i % 4 === 0 && <span className="text-[8px] text-slate-400 font-bold">{String(i).padStart(2, '0')}</span>}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Top Pages */}
-                    <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
-                        <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-4">📄 Halaman Populer</p>
-                        <div className="space-y-3">
-                            {topPages.slice(0, 6).map(([page, count]) => (
-                                <div key={page} className="flex items-center gap-3">
-                                    <div className="flex-grow">
-                                        <div className="flex items-center justify-between text-sm mb-1">
-                                            <span className="font-bold text-slate-700 truncate max-w-[200px]">{page}</span>
-                                            <span className="text-slate-400 font-medium text-xs">{count} ({pct(count)}%)</span>
-                                        </div>
-                                        <div className="w-full bg-slate-100 rounded-full h-1.5">
-                                            <div className="bg-gradient-to-r from-teal-500 to-blue-500 h-1.5 rounded-full" style={{ width: `${(count / (topPages[0]?.[1] || 1)) * 100}%` }} />
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Referral Sources */}
-                    <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
-                        <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-4">🔗 Sumber Traffic</p>
-                        <div className="space-y-3">
-                            {referralSources.map(([src, count]) => (
-                                <div key={src} className="flex items-center justify-between">
-                                    <div className="flex items-center gap-2">
-                                        <Globe size={14} className="text-slate-400" />
-                                        <span className="text-sm font-bold text-slate-700">{src}</span>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <span className="text-xs font-bold text-slate-400">{count}</span>
-                                        <span className="text-[10px] font-bold text-teal-600 bg-teal-50 px-2 py-0.5 rounded-full">{pct(count)}%</span>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Location */}
-                    <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
-                        <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-4">📍 Lokasi Pengunjung</p>
-                        <div className="space-y-2">
-                            {locationBreakdown.slice(0, 8).map(([loc, count]) => (
-                                <div key={loc} className="flex items-center justify-between py-1">
-                                    <span className="text-sm font-bold text-slate-700">{loc}</span>
-                                    <div className="flex items-center gap-2">
-                                        <div className="w-24 bg-slate-100 rounded-full h-1.5">
-                                            <div className="bg-gradient-to-r from-violet-500 to-blue-500 h-1.5 rounded-full" style={{ width: `${(count / (locationBreakdown[0]?.[1] || 1)) * 100}%` }} />
-                                        </div>
-                                        <span className="text-xs text-slate-400 font-medium w-8 text-right">{count}</span>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+            {visitors.length === 0 ? (
+                <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-16 text-center">
+                    <BarChart3 className="mx-auto text-slate-200 mb-4" size={56} />
+                    <h3 className="text-lg font-black text-slate-400 mb-2">Belum Ada Data Pengunjung</h3>
+                    <p className="text-sm text-slate-300 max-w-md mx-auto">Data pengunjung akan muncul secara otomatis setelah website dikunjungi. Pastikan tracker sudah terpasang di halaman landing.</p>
                 </div>
-            )}
+            ) : (
+                <>
 
-            {tab === 'log' && (
-                <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
-                    <div className="overflow-x-auto">
-                        <table className="w-full text-sm">
-                            <thead>
-                                <tr className="border-b border-slate-100 bg-slate-50/50">
-                                    <th className="text-left px-5 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400">Waktu</th>
-                                    <th className="text-left px-4 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400">Halaman</th>
-                                    <th className="text-left px-4 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400 hidden md:table-cell">Device</th>
-                                    <th className="text-left px-4 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400 hidden lg:table-cell">Browser</th>
-                                    <th className="text-left px-4 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400 hidden lg:table-cell">OS</th>
-                                    <th className="text-left px-4 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400 hidden md:table-cell">Screen</th>
-                                    <th className="text-left px-4 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400 hidden xl:table-cell">Sumber</th>
-                                    <th className="text-left px-4 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400">Durasi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {paginatedVisitors.map((v) => (
-                                    <tr key={v.id} className="border-b border-slate-50 hover:bg-slate-50/50 transition">
-                                        <td className="px-5 py-3">
-                                            <div>
-                                                <p className="font-bold text-slate-700 text-xs">{new Date(v.timestamp).toLocaleDateString('id-ID', { day: 'numeric', month: 'short' })}</p>
-                                                <p className="text-[10px] text-slate-400 font-medium">{new Date(v.timestamp).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}</p>
-                                            </div>
-                                        </td>
-                                        <td className="px-4 py-3">
-                                            <span className="text-xs font-bold text-teal-600 bg-teal-50 px-2 py-1 rounded-lg max-w-[180px] truncate block">{v.page}</span>
-                                        </td>
-                                        <td className="px-4 py-3 hidden md:table-cell">
-                                            <div className="flex items-center gap-1.5 text-xs text-slate-600">
-                                                {deviceIcon(v.device)}
-                                                <span className="font-medium">{v.device}</span>
-                                            </div>
-                                        </td>
-                                        <td className="px-4 py-3 hidden lg:table-cell text-xs text-slate-500 font-medium">{v.browser}</td>
-                                        <td className="px-4 py-3 hidden lg:table-cell text-xs text-slate-500 font-medium">{v.os}</td>
-                                        <td className="px-4 py-3 hidden md:table-cell text-[10px] text-slate-400 font-mono">{v.screenSize}</td>
-                                        <td className="px-4 py-3 hidden xl:table-cell text-xs text-slate-500 font-medium">{v.referrer}</td>
-                                        <td className="px-4 py-3 text-xs text-slate-500 font-bold">{formatDuration(v.sessionDuration)}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-
-                    {/* Pagination */}
-                    <div className="flex items-center justify-between px-5 py-4 border-t border-slate-100">
-                        <p className="text-xs text-slate-400 font-medium">
-                            Menampilkan {(logPage - 1) * perPage + 1}–{Math.min(logPage * perPage, visitors.length)} dari {visitors.length}
-                        </p>
-                        <div className="flex items-center gap-2">
-                            <button onClick={() => setLogPage(Math.max(1, logPage - 1))} disabled={logPage === 1} className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-slate-200 transition disabled:opacity-30">
-                                <ChevronLeft size={14} />
+                    {/* Tabs */}
+                    <div className="flex gap-2">
+                        {(['overview', 'log', 'devices'] as const).map((t) => (
+                            <button
+                                key={t}
+                                onClick={() => setTab(t)}
+                                className={`px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition ${tab === t ? 'bg-slate-900 text-white' : 'bg-white border border-slate-200 text-slate-500 hover:border-slate-300'}`}
+                            >
+                                {t === 'overview' ? '📊 Overview' : t === 'log' ? '📋 Log Visitor' : '📱 Devices'}
                             </button>
-                            <span className="text-xs font-bold text-slate-600">{logPage}/{totalPages}</span>
-                            <button onClick={() => setLogPage(Math.min(totalPages, logPage + 1))} disabled={logPage === totalPages} className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-slate-200 transition disabled:opacity-30">
-                                <ChevronRight size={14} />
-                            </button>
-                        </div>
+                        ))}
                     </div>
-                </div>
-            )}
 
-            {tab === 'devices' && (
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {/* Device */}
-                    <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
-                        <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-4">📱 Device</p>
-                        <div className="space-y-4">
-                            {deviceBreakdown.map(([device, count]) => (
-                                <div key={device}>
-                                    <div className="flex items-center justify-between mb-1">
-                                        <div className="flex items-center gap-2 text-sm font-bold text-slate-700">
-                                            {deviceIcon(device)} {device}
+                    {/* Tab Content */}
+                    {tab === 'overview' && (
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            {/* Hourly Traffic Chart */}
+                            <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
+                                <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-4">⏰ Distribusi Jam Kunjungan</p>
+                                <div className="flex items-end gap-1 h-40">
+                                    {hourlyDist.map((count, i) => (
+                                        <div key={i} className="flex-1 flex flex-col items-center gap-1">
+                                            <div
+                                                className="w-full bg-gradient-to-t from-teal-500 to-blue-500 rounded-t-sm transition-all hover:from-teal-400 hover:to-blue-400 min-h-[2px]"
+                                                style={{ height: `${(count / maxHourly) * 100}%` }}
+                                                title={`${String(i).padStart(2, '0')}:00 — ${count} visits`}
+                                            />
+                                            {i % 4 === 0 && <span className="text-[8px] text-slate-400 font-bold">{String(i).padStart(2, '0')}</span>}
                                         </div>
-                                        <span className="text-xs text-slate-400">{pct(count)}%</span>
-                                    </div>
-                                    <div className="w-full bg-slate-100 rounded-full h-2.5">
-                                        <div className="bg-gradient-to-r from-blue-500 to-teal-500 h-2.5 rounded-full transition-all" style={{ width: `${(count / visitors.length) * 100}%` }} />
-                                    </div>
+                                    ))}
                                 </div>
-                            ))}
-                        </div>
-                    </div>
+                            </div>
 
-                    {/* Browser */}
-                    <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
-                        <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-4">🌐 Browser</p>
-                        <div className="space-y-4">
-                            {browserBreakdown.map(([browser, count]) => (
-                                <div key={browser}>
-                                    <div className="flex items-center justify-between mb-1">
-                                        <span className="text-sm font-bold text-slate-700">{browser}</span>
-                                        <span className="text-xs text-slate-400">{pct(count)}%</span>
-                                    </div>
-                                    <div className="w-full bg-slate-100 rounded-full h-2.5">
-                                        <div className="bg-gradient-to-r from-violet-500 to-purple-500 h-2.5 rounded-full transition-all" style={{ width: `${(count / visitors.length) * 100}%` }} />
-                                    </div>
+                            {/* Top Pages */}
+                            <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
+                                <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-4">📄 Halaman Populer</p>
+                                <div className="space-y-3">
+                                    {topPages.slice(0, 6).map(([page, count]) => (
+                                        <div key={page} className="flex items-center gap-3">
+                                            <div className="flex-grow">
+                                                <div className="flex items-center justify-between text-sm mb-1">
+                                                    <span className="font-bold text-slate-700 truncate max-w-[200px]">{page}</span>
+                                                    <span className="text-slate-400 font-medium text-xs">{count} ({pct(count)}%)</span>
+                                                </div>
+                                                <div className="w-full bg-slate-100 rounded-full h-1.5">
+                                                    <div className="bg-gradient-to-r from-teal-500 to-blue-500 h-1.5 rounded-full" style={{ width: `${(count / (topPages[0]?.[1] || 1)) * 100}%` }} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
-                            ))}
-                        </div>
-                    </div>
+                            </div>
 
-                    {/* OS */}
-                    <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
-                        <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-4">💻 Sistem Operasi</p>
-                        <div className="space-y-4">
-                            {osBreakdown.map(([os, count]) => (
-                                <div key={os}>
-                                    <div className="flex items-center justify-between mb-1">
-                                        <span className="text-sm font-bold text-slate-700">{os}</span>
-                                        <span className="text-xs text-slate-400">{pct(count)}%</span>
-                                    </div>
-                                    <div className="w-full bg-slate-100 rounded-full h-2.5">
-                                        <div className="bg-gradient-to-r from-amber-500 to-orange-500 h-2.5 rounded-full transition-all" style={{ width: `${(count / visitors.length) * 100}%` }} />
-                                    </div>
+                            {/* Referral Sources */}
+                            <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
+                                <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-4">🔗 Sumber Traffic</p>
+                                <div className="space-y-3">
+                                    {referralSources.map(([src, count]) => (
+                                        <div key={src} className="flex items-center justify-between">
+                                            <div className="flex items-center gap-2">
+                                                <Globe size={14} className="text-slate-400" />
+                                                <span className="text-sm font-bold text-slate-700">{src}</span>
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-xs font-bold text-slate-400">{count}</span>
+                                                <span className="text-[10px] font-bold text-teal-600 bg-teal-50 px-2 py-0.5 rounded-full">{pct(count)}%</span>
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
-                            ))}
+                            </div>
+
+                            {/* Location */}
+                            <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
+                                <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-4">📍 Lokasi Pengunjung</p>
+                                <div className="space-y-2">
+                                    {locationBreakdown.slice(0, 8).map(([loc, count]) => (
+                                        <div key={loc} className="flex items-center justify-between py-1">
+                                            <span className="text-sm font-bold text-slate-700">{loc}</span>
+                                            <div className="flex items-center gap-2">
+                                                <div className="w-24 bg-slate-100 rounded-full h-1.5">
+                                                    <div className="bg-gradient-to-r from-violet-500 to-blue-500 h-1.5 rounded-full" style={{ width: `${(count / (locationBreakdown[0]?.[1] || 1)) * 100}%` }} />
+                                                </div>
+                                                <span className="text-xs text-slate-400 font-medium w-8 text-right">{count}</span>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    )}
+
+                    {tab === 'log' && (
+                        <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+                            <div className="overflow-x-auto">
+                                <table className="w-full text-sm">
+                                    <thead>
+                                        <tr className="border-b border-slate-100 bg-slate-50/50">
+                                            <th className="text-left px-5 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400">Waktu</th>
+                                            <th className="text-left px-4 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400">Halaman</th>
+                                            <th className="text-left px-4 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400 hidden md:table-cell">Device</th>
+                                            <th className="text-left px-4 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400 hidden lg:table-cell">Browser</th>
+                                            <th className="text-left px-4 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400 hidden lg:table-cell">OS</th>
+                                            <th className="text-left px-4 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400 hidden md:table-cell">Screen</th>
+                                            <th className="text-left px-4 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400 hidden xl:table-cell">Sumber</th>
+                                            <th className="text-left px-4 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400">Durasi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {paginatedVisitors.map((v) => (
+                                            <tr key={v.id} className="border-b border-slate-50 hover:bg-slate-50/50 transition">
+                                                <td className="px-5 py-3">
+                                                    <div>
+                                                        <p className="font-bold text-slate-700 text-xs">{new Date(v.timestamp).toLocaleDateString('id-ID', { day: 'numeric', month: 'short' })}</p>
+                                                        <p className="text-[10px] text-slate-400 font-medium">{new Date(v.timestamp).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}</p>
+                                                    </div>
+                                                </td>
+                                                <td className="px-4 py-3">
+                                                    <span className="text-xs font-bold text-teal-600 bg-teal-50 px-2 py-1 rounded-lg max-w-[180px] truncate block">{v.page}</span>
+                                                </td>
+                                                <td className="px-4 py-3 hidden md:table-cell">
+                                                    <div className="flex items-center gap-1.5 text-xs text-slate-600">
+                                                        {deviceIcon(v.device)}
+                                                        <span className="font-medium">{v.device}</span>
+                                                    </div>
+                                                </td>
+                                                <td className="px-4 py-3 hidden lg:table-cell text-xs text-slate-500 font-medium">{v.browser}</td>
+                                                <td className="px-4 py-3 hidden lg:table-cell text-xs text-slate-500 font-medium">{v.os}</td>
+                                                <td className="px-4 py-3 hidden md:table-cell text-[10px] text-slate-400 font-mono">{v.screenSize}</td>
+                                                <td className="px-4 py-3 hidden xl:table-cell text-xs text-slate-500 font-medium">{v.referrer}</td>
+                                                <td className="px-4 py-3 text-xs text-slate-500 font-bold">{formatDuration(v.sessionDuration)}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            {/* Pagination */}
+                            <div className="flex items-center justify-between px-5 py-4 border-t border-slate-100">
+                                <p className="text-xs text-slate-400 font-medium">
+                                    Menampilkan {(logPage - 1) * perPage + 1}–{Math.min(logPage * perPage, visitors.length)} dari {visitors.length}
+                                </p>
+                                <div className="flex items-center gap-2">
+                                    <button onClick={() => setLogPage(Math.max(1, logPage - 1))} disabled={logPage === 1} className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-slate-200 transition disabled:opacity-30">
+                                        <ChevronLeft size={14} />
+                                    </button>
+                                    <span className="text-xs font-bold text-slate-600">{logPage}/{totalPages}</span>
+                                    <button onClick={() => setLogPage(Math.min(totalPages, logPage + 1))} disabled={logPage === totalPages} className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-slate-200 transition disabled:opacity-30">
+                                        <ChevronRight size={14} />
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {tab === 'devices' && (
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            {/* Device */}
+                            <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
+                                <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-4">📱 Device</p>
+                                <div className="space-y-4">
+                                    {deviceBreakdown.map(([device, count]) => (
+                                        <div key={device}>
+                                            <div className="flex items-center justify-between mb-1">
+                                                <div className="flex items-center gap-2 text-sm font-bold text-slate-700">
+                                                    {deviceIcon(device)} {device}
+                                                </div>
+                                                <span className="text-xs text-slate-400">{pct(count)}%</span>
+                                            </div>
+                                            <div className="w-full bg-slate-100 rounded-full h-2.5">
+                                                <div className="bg-gradient-to-r from-blue-500 to-teal-500 h-2.5 rounded-full transition-all" style={{ width: `${(count / visitors.length) * 100}%` }} />
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Browser */}
+                            <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
+                                <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-4">🌐 Browser</p>
+                                <div className="space-y-4">
+                                    {browserBreakdown.map(([browser, count]) => (
+                                        <div key={browser}>
+                                            <div className="flex items-center justify-between mb-1">
+                                                <span className="text-sm font-bold text-slate-700">{browser}</span>
+                                                <span className="text-xs text-slate-400">{pct(count)}%</span>
+                                            </div>
+                                            <div className="w-full bg-slate-100 rounded-full h-2.5">
+                                                <div className="bg-gradient-to-r from-violet-500 to-purple-500 h-2.5 rounded-full transition-all" style={{ width: `${(count / visitors.length) * 100}%` }} />
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* OS */}
+                            <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
+                                <p className="text-xs font-black uppercase tracking-widest text-slate-400 mb-4">💻 Sistem Operasi</p>
+                                <div className="space-y-4">
+                                    {osBreakdown.map(([os, count]) => (
+                                        <div key={os}>
+                                            <div className="flex items-center justify-between mb-1">
+                                                <span className="text-sm font-bold text-slate-700">{os}</span>
+                                                <span className="text-xs text-slate-400">{pct(count)}%</span>
+                                            </div>
+                                            <div className="w-full bg-slate-100 rounded-full h-2.5">
+                                                <div className="bg-gradient-to-r from-amber-500 to-orange-500 h-2.5 rounded-full transition-all" style={{ width: `${(count / visitors.length) * 100}%` }} />
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                </>
             )}
         </div>
     );

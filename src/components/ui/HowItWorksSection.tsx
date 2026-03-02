@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import clsx from 'clsx';
-import { FileText, Wand2, Save, AlertCircle } from 'lucide-react';
+import { FileText, Wand2, Save, AlertCircle, ListChecks } from 'lucide-react';
 
 const HowItWorksSection = () => {
-  const [activeTab, setActiveTab] = useState<'kerangka' | 'generator'>('kerangka');
+  const [activeTab, setActiveTab] = useState<'kerangka' | 'generator' | 'outline'>('kerangka');
 
   return (
     <section id="how-it-works" className="py-12 md:py-24 bg-slate-50 relative overflow-hidden">
@@ -41,6 +41,15 @@ const HowItWorksSection = () => {
                 )}
               >
                 <Wand2 size={20} /> <span>Generator Judul</span>
+              </button>
+              <button
+                onClick={() => setActiveTab('outline')}
+                className={clsx(
+                  "px-4 sm:px-6 md:px-10 py-3 md:py-4 rounded-full font-black transition-all duration-300 text-xs sm:text-sm md:text-lg flex items-center gap-2 sm:gap-3 min-h-[44px]",
+                  activeTab === 'outline' ? 'bg-orange-500 text-white shadow-lg' : 'text-slate-500 hover:text-slate-700'
+                )}
+              >
+                <ListChecks size={20} /> <span>Outline Skripsi</span>
               </button>
             </div>
           </div>
@@ -113,13 +122,47 @@ const HowItWorksSection = () => {
             </div>
           )}
 
-          {/* Additional Info for Generator */}
-          {activeTab === 'generator' && (
-            <div className="mt-8 text-center bg-blue-50/50 p-6 rounded-3xl border border-blue-100 border-dashed animate-in fade-in zoom-in duration-300">
+          {/* Content: Outline Skripsi */}
+          {activeTab === 'outline' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-in slide-in-from-bottom-4 fade-in duration-500">
+              {/* Step 1 */}
+              <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-lg hover:shadow-xl transition-all duration-300 group relative overflow-hidden h-full">
+                <div className="absolute -right-4 -top-4 w-20 h-20 bg-orange-50 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+                <div className="w-12 h-12 bg-orange-500 text-white rounded-2xl flex items-center justify-center font-black text-xl mb-6 relative z-10 shadow-lg shadow-orange-200">1</div>
+                <h4 className="font-heading font-black text-lg text-slate-900 mb-3 relative z-10">Beli Paket</h4>
+                <p className="text-slate-500 text-sm font-medium relative z-10 leading-relaxed">Kunjungi <span className="text-orange-600 font-bold">lynk.id/dosbing.ai</span>, pilih paket Outline Skripsi, dan selesaikan pembayaran.</p>
+              </div>
+              {/* Step 2 */}
+              <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-lg hover:shadow-xl transition-all duration-300 group relative overflow-hidden h-full">
+                <div className="absolute -right-4 -top-4 w-20 h-20 bg-orange-50 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+                <div className="w-12 h-12 bg-orange-500 text-white rounded-2xl flex items-center justify-center font-black text-xl mb-6 relative z-10 shadow-lg shadow-orange-200">2</div>
+                <h4 className="font-heading font-black text-lg text-slate-900 mb-3 relative z-10">Konfirmasi ke Admin</h4>
+                <p className="text-slate-500 text-sm font-medium relative z-10 leading-relaxed">Kirim screenshot bukti bayar + <span className="text-orange-600 font-bold">judul skripsi</span> kamu ke WhatsApp Admin di nomor <span className="text-orange-600 font-bold">0821-1870-9218</span>.</p>
+              </div>
+              {/* Step 3 */}
+              <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-lg hover:shadow-xl transition-all duration-300 group relative overflow-hidden h-full">
+                <div className="absolute -right-4 -top-4 w-20 h-20 bg-orange-50 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+                <div className="w-12 h-12 bg-orange-500 text-white rounded-2xl flex items-center justify-center font-black text-xl mb-6 relative z-10 shadow-lg shadow-orange-200">3</div>
+                <h4 className="font-heading font-black text-lg text-slate-900 mb-3 relative z-10">Terima Outline</h4>
+                <p className="text-slate-500 text-sm font-medium relative z-10 leading-relaxed">Admin akan memproses dan mengirimkan dokumen Outline Skripsi (.docx) Bab 1 – Bab 3 langsung ke WhatsApp kamu.</p>
+              </div>
+              {/* Step 4 */}
+              <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-lg hover:shadow-xl transition-all duration-300 group relative overflow-hidden h-full">
+                <div className="absolute -right-4 -top-4 w-20 h-20 bg-orange-50 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+                <div className="w-12 h-12 bg-orange-500 text-white rounded-2xl flex items-center justify-center font-black text-xl mb-6 relative z-10 shadow-lg shadow-orange-200">4</div>
+                <h4 className="font-heading font-black text-lg text-slate-900 mb-3 relative z-10">Mulai Mengerjakan</h4>
+                <p className="text-slate-500 text-sm font-medium relative z-10 leading-relaxed">Gunakan outline sebagai peta jalan skripsimu. Isi setiap sub-bab sesuai panduan, lalu konsultasikan ke dosen pembimbing.</p>
+              </div>
+            </div>
+          )}
+
+          {/* Additional Info for Outline */}
+          {activeTab === 'outline' && (
+            <div className="mt-8 text-center bg-orange-50/50 p-6 rounded-3xl border border-orange-100 border-dashed animate-in fade-in zoom-in duration-300">
               <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-slate-600 text-sm">
-                <p className="font-bold flex items-center"><AlertCircle className="text-blue-500 mr-2" size={16} /> 1 Token = 1 Sesi: Kode akses hanya berlaku untuk satu kali sesi penelitian penuh.</p>
+                <p className="font-bold flex items-center"><AlertCircle className="text-orange-500 mr-2" size={16} /> Sertakan Judul: Pastikan kamu mengirimkan judul skripsi bersama bukti pembayaran agar outline bisa langsung diproses.</p>
                 <span className="hidden md:inline text-slate-300">|</span>
-                <p className="font-bold flex items-center"><Save className="text-blue-500 mr-2" size={16} /> Unduh Hasil: Pastikan kamu menyimpan hasil akhir dalam format PDF sebelum menutup browser agar data penelitianmu tidak hilang.</p>
+                <p className="font-bold flex items-center"><Save className="text-orange-500 mr-2" size={16} /> Format .docx: Outline dikirim dalam format Word yang bisa langsung diedit dan dikembangkan.</p>
               </div>
             </div>
           )}

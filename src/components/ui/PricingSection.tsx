@@ -1,4 +1,4 @@
-import { FileText, Wand2, ListChecks, MonitorPlay, Smartphone, Check, Star, Search, Network, MessageSquare, FileType, Gift } from 'lucide-react';
+import { FileText, Wand2, ListChecks, MonitorPlay, Smartphone, Check, Star, Search, Network, MessageSquare, FileType, Gift, BookOpen, Layers, Lightbulb, Sparkles, GraduationCap, MousePointerClick, ImageIcon, Settings2 } from 'lucide-react';
 
 const PricingSection = () => {
   return (
@@ -24,49 +24,51 @@ const PricingSection = () => {
         </p>
 
         <div className="flex flex-wrap justify-center items-stretch gap-8 max-w-7xl mx-auto">
-          {/* Plan 1: Kerangka Skripsi */}
+          {/* Plan 1: Kerangka Skripsi (Premium) */}
           <div className="relative w-full md:w-[45%] lg:w-[30%] group flex" data-aos="fade-up" data-aos-delay="0">
-            <div className="absolute -top-4 left-6 bg-gradient-to-r from-blue-500 to-teal-500 text-white text-[10px] font-black uppercase tracking-[0.2em] px-3 py-1.5 rounded-full shadow-lg z-20">🔥 Hemat 70%</div>
-            <div className="bg-white rounded-[2.5rem] p-6 sm:p-8 flex flex-col border border-slate-100 shadow-xl transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-2xl w-full h-full">
-              <div className="w-14 h-14 bg-teal-50 rounded-2xl flex items-center justify-center text-teal-600 mb-6 group-hover:scale-110 transition-transform duration-300">
-                <FileText size={28} />
-              </div>
-              <h4 className="font-heading text-xl font-black text-slate-900 mb-2">Kerangka Skripsi</h4>
-              <p className="text-slate-500 text-sm mb-4 font-medium italic">Template Word (.docx) Profesional</p>
+            <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-violet-500 to-purple-500 text-white font-black text-[10px] uppercase tracking-[0.2em] px-6 sm:px-8 py-2.5 rounded-full shadow-2xl z-30 whitespace-nowrap">🔥 Hemat 70%</div>
+            <div className="rounded-[2.7rem] p-[2px] bg-gradient-to-br from-violet-400 via-purple-500 to-violet-400 shadow-2xl w-full flex flex-col">
+              <div className="bg-white rounded-[2.6rem] p-5 sm:p-8 flex flex-col border border-slate-100 transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-[0_25px_50px_rgba(139,92,246,0.25)] w-full h-full">
+                <div className="w-16 h-16 bg-gradient-to-br from-violet-500 to-purple-500 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-violet-200 mb-6 group-hover:rotate-12 transition-transform duration-300">
+                  <FileText size={32} />
+                </div>
+                <h4 className="font-heading text-xl font-black text-violet-600 mb-2">Kerangka Skripsi</h4>
+                <p className="text-slate-500 text-sm mb-6 font-medium italic">Template Word (.docx) Profesional</p>
 
-              {/* Database Stats Bar */}
-              <div className="grid grid-cols-3 gap-2 mb-6 bg-gradient-to-r from-blue-50 to-teal-50 rounded-2xl p-3 border border-blue-100/50">
-                <div className="text-center">
-                  <p className="text-sm sm:text-base font-black text-blue-600 leading-none">6.632</p>
-                  <p className="text-[9px] font-bold text-slate-500 mt-0.5">Perguruan Tinggi</p>
+                {/* Database Stats Bar */}
+                <div className="grid grid-cols-3 gap-2 mb-6 bg-gradient-to-r from-violet-50 to-purple-50 rounded-2xl p-3 border border-violet-100/50">
+                  <div className="text-center">
+                    <p className="text-sm sm:text-base font-black text-violet-600 leading-none">6.632</p>
+                    <p className="text-[9px] font-bold text-slate-500 mt-0.5">Perguruan Tinggi</p>
+                  </div>
+                  <div className="text-center border-x border-violet-100">
+                    <p className="text-sm sm:text-base font-black text-purple-600 leading-none">33.000</p>
+                    <p className="text-[9px] font-bold text-slate-500 mt-0.5">Data Prodi</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-sm sm:text-base font-black text-violet-600 leading-none">27.000</p>
+                    <p className="text-[9px] font-bold text-slate-500 mt-0.5">Kerangka Skripsi</p>
+                  </div>
                 </div>
-                <div className="text-center border-x border-blue-100">
-                  <p className="text-sm sm:text-base font-black text-teal-600 leading-none">33.000</p>
-                  <p className="text-[9px] font-bold text-slate-500 mt-0.5">Data Prodi</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-sm sm:text-base font-black text-blue-600 leading-none">27.000</p>
-                  <p className="text-[9px] font-bold text-slate-500 mt-0.5">Kerangka Skripsi</p>
-                </div>
-              </div>
 
-              <ul className="space-y-3.5 mb-10 flex-grow text-sm font-bold text-slate-700 text-left">
-                <li className="flex items-start gap-3"><span className="w-6 h-6 rounded-lg bg-teal-500/10 text-teal-500 flex items-center justify-center flex-shrink-0 mt-0.5"><Check size={12} /></span> <span className="leading-tight">Sesuai Pedoman Kampus — Database Terlengkap se-Indonesia, Data Sesuai PDDikti</span></li>
-                <li className="flex items-start gap-3"><span className="w-6 h-6 rounded-lg bg-teal-500/10 text-teal-500 flex items-center justify-center flex-shrink-0 mt-0.5"><Check size={12} /></span> <span className="leading-tight">Prodi Kamu Pasti Ada di Database Kami</span></li>
-                <li className="flex items-start gap-3"><span className="w-6 h-6 rounded-lg bg-teal-500/10 text-teal-500 flex items-center justify-center flex-shrink-0 mt-0.5"><Check size={12} /></span> <span className="leading-tight">Praktis, Tinggal Klik!</span></li>
-                <li className="flex items-start gap-3"><span className="w-6 h-6 rounded-lg bg-teal-500/10 text-teal-500 flex items-center justify-center flex-shrink-0 mt-0.5"><Check size={12} /></span> <span className="leading-tight">Lengkap dari Sampul — Sudah Ada Logo Kampus, Tinggal Ganti Nama Aja</span></li>
-                <li className="flex items-start gap-3"><span className="w-6 h-6 rounded-lg bg-teal-500/10 text-teal-500 flex items-center justify-center flex-shrink-0 mt-0.5"><Check size={12} /></span> <span className="leading-tight">Margin, No Halaman, Font, Spasi, Hingga Daftar Isi — Yang Biasanya Ribet, Udah Jadi!</span></li>
-                <li className="flex items-start gap-3"><span className="w-6 h-6 rounded-lg bg-teal-500/10 text-teal-500 flex items-center justify-center flex-shrink-0 mt-0.5"><Check size={12} /></span> <span className="leading-tight">Komplit, Tinggal Masukin Data Kamu Aja</span></li>
-              </ul>
-              <div className="mb-6 text-left mt-auto">
-                <span className="text-slate-300 line-through text-xs font-black">Rp 35.000</span>
-                <p className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mt-1">Rp 10.000</p>
-                <span className="text-slate-400 text-[10px] font-bold mt-1 block">Lebih murah dari secangkir kopi! ☕</span>
+                <ul className="space-y-5 mb-10 flex-grow text-sm font-bold text-slate-800 text-left">
+                  <li className="flex items-start gap-4 bg-violet-50/50 p-3 rounded-xl border border-violet-100/50"><GraduationCap className="text-violet-500 flex-shrink-0 mt-0.5" size={16} /> <span className="leading-tight">Sesuai Pedoman Kampus — Database Terlengkap se-Indonesia</span></li>
+                  <li className="flex items-start gap-4 bg-violet-50/50 p-3 rounded-xl border border-violet-100/50"><Search className="text-purple-500 flex-shrink-0 mt-0.5" size={16} /> <span className="leading-tight">Prodi Kamu Pasti Ada di Database Kami</span></li>
+                  <li className="flex items-start gap-4 bg-violet-50/50 p-3 rounded-xl border border-violet-100/50"><MousePointerClick className="text-violet-600 flex-shrink-0 mt-0.5" size={16} /> <span className="leading-tight">Praktis, Tinggal Klik!</span></li>
+                  <li className="flex items-start gap-4 bg-violet-50/50 p-3 rounded-xl border border-violet-100/50"><ImageIcon className="text-purple-500 flex-shrink-0 mt-0.5" size={16} /> <span className="leading-tight">Lengkap dari Sampul — Logo Kampus Sudah Ada</span></li>
+                  <li className="flex items-start gap-4 bg-violet-50/50 p-3 rounded-xl border border-violet-100/50"><Settings2 className="text-violet-600 flex-shrink-0 mt-0.5" size={16} /> <span className="leading-tight">Margin, Font, Spasi, Daftar Isi — Semua Udah Jadi!</span></li>
+                  <li className="flex items-start gap-4 bg-violet-50/50 p-3 rounded-xl border border-violet-100/50"><Gift className="text-purple-500 flex-shrink-0 mt-0.5" size={16} /> <span className="leading-tight">Komplit, Tinggal Masukin Data Kamu Aja</span></li>
+                </ul>
+                <div className="mb-6 text-left mt-auto">
+                  <span className="text-slate-300 line-through text-xs font-black">Rp 35.000</span>
+                  <p className="text-4xl sm:text-5xl lg:text-6xl font-black text-violet-600 mt-1">Rp 10.000</p>
+                  <span className="text-slate-400 text-[10px] font-bold mt-1 block">Lebih murah dari secangkir kopi! ☕</span>
+                </div>
+                <a href="https://lynk.id/dosbing.ai/6v9p194qxev9" target="_blank" rel="noreferrer" className="w-full bg-gradient-to-r from-violet-500 to-purple-500 text-white py-5 rounded-2xl font-black text-center shadow-2xl hover:from-violet-600 hover:to-purple-600 transition transform hover:-translate-y-1 block">
+                  Ambil Template 🚀
+                </a>
+                <p className="text-slate-400 text-[10px] font-medium mt-3 text-center">🔒 Pembayaran aman & terverifikasi</p>
               </div>
-              <a href="https://lynk.id/dosbing.ai/6v9p194qxev9" target="_blank" rel="noreferrer" className="w-full bg-slate-900 text-white py-4 rounded-2xl font-black text-center shadow-[0_10px_20px_rgba(2,6,23,0.35)] hover:bg-slate-800 transition block">
-                Ambil Template
-              </a>
-              <p className="text-slate-400 text-[10px] font-medium mt-3 text-center">🔒 Pembayaran aman & terverifikasi</p>
             </div>
           </div>
 
@@ -100,21 +102,33 @@ const PricingSection = () => {
             </div>
           </div>
 
-          {/* Plan 3: Outline Skripsi (Coming Soon) */}
+          {/* Plan 3: Outline Skripsi (Premium) */}
           <div className="relative w-full md:w-[45%] lg:w-[30%] group flex" data-aos="fade-up" data-aos-delay="200">
-            <div className="bg-slate-800 rounded-[2.5rem] p-6 sm:p-8 flex flex-col relative overflow-hidden border border-slate-700/60 shadow-inner w-full h-full">
-              <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-white/5 via-transparent to-white/0"></div>
-              <div className="absolute inset-0 flex items-center justify-center z-20">
-                <div className="bg-gradient-to-r from-blue-400 to-teal-400 text-slate-900 font-black px-6 py-2 rounded-xl text-xs uppercase tracking-widest -rotate-12 shadow-2xl animate-pulse">Coming Soon</div>
+            <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-black text-[10px] uppercase tracking-[0.2em] px-6 sm:px-8 py-2.5 rounded-full shadow-2xl z-30 whitespace-nowrap">🔥 Baru — Hemat 65%</div>
+            <div className="rounded-[2.7rem] p-[2px] bg-gradient-to-br from-orange-400 via-amber-500 to-orange-400 shadow-2xl w-full flex flex-col">
+              <div className="bg-white rounded-[2.6rem] p-5 sm:p-8 flex flex-col border border-slate-100 transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-[0_25px_50px_rgba(245,158,11,0.25)] w-full h-full">
+                <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-amber-500 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-orange-200 mb-6 group-hover:rotate-12 transition-transform duration-300">
+                  <ListChecks size={32} />
+                </div>
+                <h4 className="font-heading text-xl font-black text-orange-600 mb-2">Outline Skripsi</h4>
+                <p className="text-slate-500 text-sm mb-8 font-medium italic">Breakdown Bab 1-3 Otomatis</p>
+                <ul className="space-y-5 mb-10 flex-grow text-sm font-bold text-slate-800 text-left">
+                  <li className="flex items-start gap-4 bg-orange-50/50 p-3 rounded-xl border border-orange-100/50"><BookOpen className="text-orange-500 flex-shrink-0 mt-0.5" size={16} /> <span className="leading-tight">Struktur Bab 1 – Bab 3 Lengkap & Terstruktur</span></li>
+                  <li className="flex items-start gap-4 bg-orange-50/50 p-3 rounded-xl border border-orange-100/50"><Sparkles className="text-amber-500 flex-shrink-0 mt-0.5" size={16} /> <span className="leading-tight">Otomatis Hanya dengan Input Judul Skripsi</span></li>
+                  <li className="flex items-start gap-4 bg-orange-50/50 p-3 rounded-xl border border-orange-100/50"><Layers className="text-orange-600 flex-shrink-0 mt-0.5" size={16} /> <span className="leading-tight">Latar Belakang hingga Metodologi Siap Pakai</span></li>
+                  <li className="flex items-start gap-4 bg-orange-50/50 p-3 rounded-xl border border-orange-100/50"><Lightbulb className="text-amber-500 flex-shrink-0 mt-0.5" size={16} /> <span className="leading-tight">Panduan Isi Setiap Sub-bab</span></li>
+                  <li className="flex items-start gap-4 bg-orange-50/50 p-3 rounded-xl border border-orange-100/50"><FileType className="text-red-500 flex-shrink-0 mt-0.5" size={16} /> <span className="leading-tight">Output Word (.docx) Siap Print</span></li>
+                </ul>
+                <div className="mb-6 text-left mt-auto">
+                  <span className="text-slate-300 line-through text-xs font-black">Rp 100.000</span>
+                  <p className="text-4xl sm:text-5xl lg:text-6xl font-black text-orange-600 mt-1">Rp 35.000</p>
+                  <span className="text-slate-400 text-[10px] font-bold mt-1 block">Harga promo terbatas! 🎉</span>
+                </div>
+                <a href="https://lynk.id/dosbing.ai/rnon46rd1d9e" target="_blank" rel="noreferrer" className="w-full bg-gradient-to-r from-orange-500 to-amber-500 text-white py-5 rounded-2xl font-black text-center shadow-2xl hover:from-orange-600 hover:to-amber-600 transition transform hover:-translate-y-1 block">
+                  Beli Outline Sekarang 🚀
+                </a>
+                <p className="text-slate-400 text-[10px] font-medium mt-3 text-center">🔒 Pembayaran aman & terverifikasi</p>
               </div>
-              <div className="w-14 h-14 bg-slate-700/50 rounded-2xl flex items-center justify-center text-slate-500 mb-6 border border-slate-600">
-                <ListChecks size={28} />
-              </div>
-              <h4 className="font-heading text-xl font-black text-slate-300 mb-2">Outline Skripsi</h4>
-              <p className="text-slate-400 text-sm mb-6">Breakdown Bab 1-3 Otomatis</p>
-              <p className="text-slate-500 text-xs leading-relaxed mb-8">Buat struktur skripsi dari Latar Belakang hingga Metodologi hanya dengan input judul.</p>
-              <div className="flex-grow"></div>
-              <button disabled className="w-full bg-slate-700 text-slate-500 py-5 rounded-2xl font-black cursor-not-allowed mt-auto opacity-50">Nantikan Segera</button>
             </div>
           </div>
 
