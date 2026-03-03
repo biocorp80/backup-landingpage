@@ -118,23 +118,34 @@ const HeroSection = () => {
               {content.hero.subheadline.split('{typing}')[1] || ''}
             </p>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 sm:gap-5 mb-10">
+            {/* CTA Buttons — 3 Products */}
+            <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4 mb-10">
               <a
-                href={content.hero.ctaLink}
-                className="group w-full sm:w-auto px-8 py-4 sm:py-5 bg-gradient-to-r from-blue-500 to-teal-500 text-white text-sm sm:text-base font-black rounded-2xl hover:from-blue-600 hover:to-teal-600 transition-all shadow-[0_15px_30px_rgba(26,74,182,0.3)] transform hover:-translate-y-1 text-center flex items-center justify-center gap-3"
+                href="https://lynk.id/dosbing.ai/nvynv9jqqjmj"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group w-full sm:w-auto px-7 py-4 bg-gradient-to-r from-blue-500 to-teal-500 text-white text-sm font-black rounded-2xl hover:from-blue-600 hover:to-teal-600 transition-all shadow-[0_12px_25px_rgba(26,74,182,0.3)] transform hover:-translate-y-1 text-center flex items-center justify-center gap-3"
               >
-                <Wand2 className="group-hover:rotate-12 transition-transform flex-shrink-0" size={20} />
-                <span>{content.hero.ctaText}</span>
+                <Wand2 className="group-hover:rotate-12 transition-transform flex-shrink-0" size={18} />
+                <span>Generator Judul Auto ACC</span>
               </a>
               <a
                 href="https://lynk.id/dosbing.ai/6v9p194qxev9"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto px-8 py-4 sm:py-5 bg-white/5 border-2 border-teal-400/30 text-white text-sm sm:text-base font-black rounded-2xl hover:bg-white/10 backdrop-blur-sm transition-all text-center flex items-center justify-center gap-3 hover:-translate-y-1"
+                className="group w-full sm:w-auto px-7 py-4 bg-white/5 border-2 border-violet-400/40 text-white text-sm font-black rounded-2xl hover:bg-violet-500/10 hover:border-violet-400/70 backdrop-blur-sm transition-all text-center flex items-center justify-center gap-3 hover:-translate-y-1"
               >
-                <FileTextIcon className="flex-shrink-0" size={20} />
-                <span>Template Skripsi Rp 10rb</span>
+                <FileTextIcon className="group-hover:scale-110 transition-transform flex-shrink-0" size={18} />
+                <span>Kerangka Skripsi Siap Isi</span>
+              </a>
+              <a
+                href="https://lynk.id/dosbing.ai/rnon46rd1d9e"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group w-full sm:w-auto px-7 py-4 bg-white/5 border-2 border-orange-400/40 text-white text-sm font-black rounded-2xl hover:bg-orange-500/10 hover:border-orange-400/70 backdrop-blur-sm transition-all text-center flex items-center justify-center gap-3 hover:-translate-y-1"
+              >
+                <BookOpen className="group-hover:scale-110 transition-transform flex-shrink-0" size={18} />
+                <span>Generator Outline Skripsi</span>
               </a>
             </div>
 
