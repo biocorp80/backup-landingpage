@@ -16,7 +16,7 @@ const ContactSection = () => {
           {/* Contact Info Cards */}
           <div className="space-y-6" data-aos="fade-right">
             {/* WhatsApp Card */}
-            <a href="https://wa.me/6285678890596" target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 bg-white p-6 rounded-3xl border border-slate-100 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 group">
+            <a href="https://wa.me/628567890596" target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 bg-white p-6 rounded-3xl border border-slate-100 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 group">
               <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center text-green-600 text-3xl shadow-inner group-hover:scale-110 transition-transform">
                 <MessageCircle size={32} />
               </div>
