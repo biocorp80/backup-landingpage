@@ -1,4 +1,4 @@
-import { ListChecks, BookOpen, Layers, Lightbulb, Sparkles, FileText, Target, Info } from 'lucide-react';
+import { ListChecks, BookOpen, Layers, Lightbulb, Sparkles, FileText, Target, Info, Play, CreditCard } from 'lucide-react';
 
 const OutlineFeaturesSection = () => {
     return (
@@ -80,6 +80,67 @@ const OutlineFeaturesSection = () => {
                         <p className="text-sm text-slate-500 leading-relaxed">
                             Tidak perlu berjam-jam menyusun kerangka manual. Outline otomatis membantu kamu fokus langsung ke penulisan isi skripsi.
                         </p>
+                    </div>
+                </div>
+
+                {/* Video Section */}
+                <div className="mb-16" data-aos="fade-up">
+                    <div className="text-center mb-10">
+                        <h3 className="text-2xl md:text-3xl font-black text-slate-900 mb-4">Lihat Langsung <span className="text-orange-600">Cara Kerjanya</span></h3>
+                        <p className="text-slate-500 font-medium max-w-2xl mx-auto">
+                            Tonton video berikut untuk memahami produk dan tata cara pemesanan.
+                        </p>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        {/* Video 1: Tentang Produk */}
+                        <div className="group">
+                            <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-3xl p-5 shadow-lg border border-orange-100/50 hover:shadow-xl transition-shadow duration-300">
+                                <div className="relative w-full overflow-hidden rounded-2xl" style={{ paddingBottom: '56.25%' }}>
+                                    <iframe
+                                        className="absolute top-0 left-0 w-full h-full"
+                                        src="https://www.youtube.com/embed/hVVTbWDrGN0"
+                                        title="Tentang Produk Outline Skripsi"
+                                        frameBorder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        allowFullScreen
+                                    ></iframe>
+                                </div>
+                                <div className="mt-5 flex items-center gap-3">
+                                    <div className="w-10 h-10 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <Play size={20} />
+                                    </div>
+                                    <div>
+                                        <h4 className="font-bold text-slate-900">Tentang Produk</h4>
+                                        <p className="text-xs text-slate-500">Penjelasan lengkap tentang Outline Skripsi Otomatis</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Video 2: Tata Cara Pembayaran */}
+                        <div className="group">
+                            <div className="bg-gradient-to-br from-teal-50 to-blue-50 rounded-3xl p-5 shadow-lg border border-teal-100/50 hover:shadow-xl transition-shadow duration-300">
+                                <div className="relative w-full overflow-hidden rounded-2xl" style={{ paddingBottom: '56.25%' }}>
+                                    <iframe
+                                        className="absolute top-0 left-0 w-full h-full"
+                                        src="https://www.youtube.com/embed/Wu01TGkb8Yc"
+                                        title="Tata Cara Pembayaran"
+                                        frameBorder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        allowFullScreen
+                                    ></iframe>
+                                </div>
+                                <div className="mt-5 flex items-center gap-3">
+                                    <div className="w-10 h-10 bg-teal-100 text-teal-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <CreditCard size={20} />
+                                    </div>
+                                    <div>
+                                        <h4 className="font-bold text-slate-900">Tata Cara Pembayaran</h4>
+                                        <p className="text-xs text-slate-500">Panduan langkah demi langkah proses pembayaran</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
