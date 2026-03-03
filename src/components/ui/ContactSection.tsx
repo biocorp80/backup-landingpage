@@ -23,7 +23,7 @@ const ContactSection = () => {
               <div>
                 <h4 className="text-xl font-black text-slate-900 mb-1">WhatsApp Admin</h4>
                 <p className="text-slate-500 text-sm font-medium mb-1">Respon Cepat (09:00 - 21:00 WIB)</p>
-                <p className="text-teal-600 font-bold text-lg group-hover:underline">+62 821-1870-9218</p>
+                <p className="text-teal-600 font-bold text-lg group-hover:underline">+62 856-7890-596</p>
               </div>
             </a>
 
