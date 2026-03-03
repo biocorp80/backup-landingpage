@@ -86,7 +86,7 @@ const TermsPage = () => {
                 <h3 className="text-xl font-bold text-slate-900 mb-4">6. Kontak dan Bantuan</h3>
                 <p className="text-slate-600 leading-relaxed mb-2">Segala bentuk kendala teknis atau pertanyaan lebih lanjut dapat disampaikan melalui:</p>
                 <ul className="list-disc pl-6 space-y-2 text-slate-600 leading-relaxed">
-                  <li><strong>WhatsApp Admin:</strong> 0821-1187-09218.</li>
+                  <li><strong>WhatsApp Admin:</strong> 0856-7890-596.</li>
                   <li><strong>Waktu Operasional:</strong> Pengiriman file diproses maksimal 1x24 jam kerja setelah konfirmasi.</li>
                 </ul>
               </div>

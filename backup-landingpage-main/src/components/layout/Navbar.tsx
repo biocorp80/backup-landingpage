@@ -112,7 +112,7 @@ const Navbar = () => {
           <NavLink to="#faq" label="FAQ" isScrollLink />
           <NavLink to="/about" label="Tentang Kami" />
           <a
-            href="https://wa.me/6282118709218"
+            href="https://wa.me/6285678890596"
             target="_blank"
             rel="noopener noreferrer"
             className="px-6 py-2.5 rounded-full bg-slate-900 text-white text-sm font-bold hover:bg-primary transition-all shadow-lg hover:shadow-primary/30 transform hover:-translate-y-0.5"
@@ -138,7 +138,7 @@ const Navbar = () => {
           <MobileNavLink to="#faq" label="FAQ" isScrollLink />
           <MobileNavLink to="/about" label="Tentang Kami" />
           <a
-            href="https://wa.me/6282118709218"
+            href="https://wa.me/6285678890596"
             target="_blank"
             rel="noopener noreferrer"
             className="w-full text-center px-6 py-3 rounded-xl bg-slate-900 text-white text-sm font-bold hover:bg-primary transition-all shadow-lg"

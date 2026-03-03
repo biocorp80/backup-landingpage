@@ -69,7 +69,7 @@ const DEFAULT_CONTENT: SiteContent = {
             { label: 'Tentang Kami', to: '/about', isScrollLink: false },
         ],
         ctaText: '🚀 Mulai Sekarang',
-        ctaLink: 'https://wa.me/6282118709218',
+        ctaLink: 'https://wa.me/6285678890596',
     },
     features: [
         { title: 'Generator Judul', description: '3 opsi judul skripsi tervalidasi akademik dalam 15 menit', emoji: '🎯' },
@@ -78,7 +78,7 @@ const DEFAULT_CONTENT: SiteContent = {
         { title: 'Database PDDikti', description: 'Terintegrasi dengan data kampus seluruh Indonesia', emoji: '🏫' },
     ],
     contact: {
-        whatsappNumber: '6282118709218',
+        whatsappNumber: '6285678890596',
         email: 'dosbingai@gmail.com',
         address: 'Cipinang, Cimaung, Kab. Bandung, Jawa Barat',
     },

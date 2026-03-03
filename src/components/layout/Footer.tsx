@@ -10,7 +10,7 @@ const Footer = () => {
             Siap Kelar Skripsi? <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 to-blue-400 underline decoration-teal-500/30">Mulai Sekarang!</span> 🚀
           </h2>
           <a
-            href="https://wa.me/6282118709218"
+            href="https://wa.me/6285678890596"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-4 bg-gradient-to-r from-blue-500 to-teal-500 text-white px-12 py-6 rounded-3xl font-black text-xl shadow-xl hover:from-blue-600 hover:to-teal-600 transition-all transform hover:-translate-y-2 active:scale-95"

@@ -69,7 +69,7 @@ const HowItWorksSection = () => {
                 <div className="absolute -right-4 -top-4 w-20 h-20 bg-teal-50 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
                 <div className="w-12 h-12 bg-teal-500 text-white rounded-2xl flex items-center justify-center font-black text-xl mb-6 relative z-10 shadow-lg shadow-teal-200">2</div>
                 <h4 className="font-heading font-black text-lg text-slate-900 mb-3 relative z-10">Konfirmasi ke Admin</h4>
-                <p className="text-slate-500 text-sm font-medium relative z-10 leading-relaxed">Kirim screenshot bukti bayar ke WhatsApp Admin di nomor <span className="text-teal-600 font-bold">0821-1870-9218</span>.</p>
+                <p className="text-slate-500 text-sm font-medium relative z-10 leading-relaxed">Kirim screenshot bukti bayar ke WhatsApp Admin di nomor <span className="text-teal-600 font-bold">0856-7890-596</span>.</p>
               </div>
               {/* Step 3 */}
               <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-lg hover:shadow-xl transition-all duration-300 group relative overflow-hidden h-full">
@@ -103,7 +103,7 @@ const HowItWorksSection = () => {
                 <div className="absolute -right-4 -top-4 w-20 h-20 bg-blue-50 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
                 <div className="w-12 h-12 bg-blue-500 text-white rounded-2xl flex items-center justify-center font-black text-xl mb-6 relative z-10 shadow-lg shadow-blue-200">2</div>
                 <h4 className="font-heading font-black text-lg text-slate-900 mb-3 relative z-10">Konfirmasi ke Admin</h4>
-                <p className="text-slate-500 text-sm font-medium relative z-10 leading-relaxed">Kirim screenshot bukti bayar ke WhatsApp Admin di nomor <span className="text-blue-600 font-bold">0821-1870-9218</span>.</p>
+                <p className="text-slate-500 text-sm font-medium relative z-10 leading-relaxed">Kirim screenshot bukti bayar ke WhatsApp Admin di nomor <span className="text-blue-600 font-bold">0856-7890-596</span>.</p>
               </div>
               {/* Step 3 */}
               <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-lg hover:shadow-xl transition-all duration-300 group relative overflow-hidden h-full">
@@ -137,7 +137,7 @@ const HowItWorksSection = () => {
                 <div className="absolute -right-4 -top-4 w-20 h-20 bg-orange-50 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
                 <div className="w-12 h-12 bg-orange-500 text-white rounded-2xl flex items-center justify-center font-black text-xl mb-6 relative z-10 shadow-lg shadow-orange-200">2</div>
                 <h4 className="font-heading font-black text-lg text-slate-900 mb-3 relative z-10">Konfirmasi ke Admin</h4>
-                <p className="text-slate-500 text-sm font-medium relative z-10 leading-relaxed">Kirim screenshot bukti bayar + <span className="text-orange-600 font-bold">judul skripsi</span> kamu ke WhatsApp Admin di nomor <span className="text-orange-600 font-bold">0821-1870-9218</span>.</p>
+                <p className="text-slate-500 text-sm font-medium relative z-10 leading-relaxed">Kirim screenshot bukti bayar + <span className="text-orange-600 font-bold">judul skripsi</span> kamu ke WhatsApp Admin di nomor <span className="text-orange-600 font-bold">0856-7890-596</span>.</p>
               </div>
               {/* Step 3 */}
               <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-lg hover:shadow-xl transition-all duration-300 group relative overflow-hidden h-full">

@@ -113,7 +113,7 @@ const Navbar = () => {
           <NavLink to="/blog" label="Blog" />
           <NavLink to="/about" label="Tentang Kami" />
           <a
-            href="https://wa.me/6282118709218"
+            href="https://wa.me/6285678890596"
             target="_blank"
             rel="noopener noreferrer"
             className="px-6 py-2.5 rounded-full bg-gradient-to-r from-blue-500 to-teal-500 text-white text-sm font-bold hover:from-blue-600 hover:to-teal-600 transition-all shadow-lg hover:shadow-teal-500/30 transform hover:-translate-y-0.5"
@@ -140,7 +140,7 @@ const Navbar = () => {
           <MobileNavLink to="/blog" label="Blog" />
           <MobileNavLink to="/about" label="Tentang Kami" />
           <a
-            href="https://wa.me/6282118709218"
+            href="https://wa.me/6285678890596"
             target="_blank"
             rel="noopener noreferrer"
             className="w-full text-center px-6 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-teal-500 text-white text-sm font-bold hover:from-blue-600 hover:to-teal-600 transition-all shadow-lg"

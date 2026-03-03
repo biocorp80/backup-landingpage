@@ -10,7 +10,7 @@ const Footer = () => {
             Siap Lulus Skripsi <br /> <span className="text-secondary underline decoration-primary/50">Tahun Ini?</span>
           </h2>
           <a
-            href="https://wa.me/6282118709218"
+            href="https://wa.me/6285678890596"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-4 bg-secondary text-white px-12 py-6 rounded-3xl font-black text-xl shadow-xl hover:bg-teal-500 transition-all transform hover:-translate-y-2 active:scale-95"

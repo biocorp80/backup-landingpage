@@ -85,7 +85,7 @@ const PrivacyPage = () => {
                 <p className="text-slate-600 mb-2">Jika Anda memiliki pertanyaan mengenai kebijakan privasi ini, silakan hubungi kami di:</p>
                 <ul className="list-disc pl-6 space-y-2 text-slate-600 leading-relaxed">
                   <li><strong>Email:</strong> dosbingai@gmail.com</li>
-                  <li><strong>WhatsApp Admin:</strong> 0821-1870-9218</li>
+                  <li><strong>WhatsApp Admin:</strong> 0856-7890-596</li>
                   <li><strong>Kantor Pusat:</strong> Cipinang, Cimaung, Kabupaten Bandung, Jawa Barat 40374</li>
                 </ul>
               </div>
