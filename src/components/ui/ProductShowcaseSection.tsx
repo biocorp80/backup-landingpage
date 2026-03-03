@@ -64,12 +64,15 @@ const ProductShowcaseSection = () => {
 
           {/* Outline Skripsi Otomatis */}
           <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-orange-100 flex flex-col ring-2 ring-orange-200/50" data-aos="fade-up" data-aos-delay="200">
-            <div className="relative pb-[56.25%] h-0 bg-gradient-to-br from-orange-500 to-amber-500">
-              <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-6 text-center">
-                <ListChecks size={48} className="mb-4 opacity-90" />
-                <p className="font-black text-lg">Outline Skripsi Otomatis</p>
-                <p className="text-white/80 text-sm mt-1">Video segera hadir</p>
-              </div>
+            <div className="relative pb-[56.25%] h-0 bg-black">
+              <iframe
+                className="absolute top-0 left-0 w-full h-full"
+                src="https://www.youtube.com/embed/hVVTbWDrGN0?rel=0"
+                title="Outline Skripsi Otomatis - Dosbing.ai"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
             </div>
             <div className="p-6 lg:p-8 flex-grow">
               <div className="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center mb-4">
@@ -145,12 +148,15 @@ const ProductShowcaseSection = () => {
 
           {/* Tutorial Pembelian Outline Skripsi */}
           <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-orange-100 flex flex-col ring-2 ring-orange-200/50" data-aos="fade-up" data-aos-delay="200">
-            <div className="relative pb-[56.25%] h-0 bg-gradient-to-br from-orange-500 to-amber-500">
-              <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-6 text-center">
-                <ListChecks size={48} className="mb-4 opacity-90" />
-                <p className="font-black text-lg">Tutorial Pembelian</p>
-                <p className="text-white/80 text-sm mt-1">Video segera hadir</p>
-              </div>
+            <div className="relative pb-[56.25%] h-0 bg-black">
+              <iframe
+                className="absolute top-0 left-0 w-full h-full"
+                src="https://www.youtube.com/embed/Wu01TGkb8Yc?rel=0"
+                title="Tutorial Pembelian Outline Skripsi"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
             </div>
             <div className="p-6 lg:p-8 flex-grow">
               <div className="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center mb-4">
